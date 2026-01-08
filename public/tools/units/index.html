@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert between different units of measurement. Length, weight, temperature, volume converter tool online.">
+    <meta name="keywords" content="unit converter online, length converter, weight converter, temperature converter c to f">
+    <title>Unit Converter - Length, Weight, Temperature | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">UNIT.CONVERTER.TOOL</h1>
+                <p class="tool-description">
+                    Convert between different units of measurement including length, weight, temperature, and volume. 
+                    Fast and accurate unit conversions for everyday use.
+                </p>
+
+                <!-- Unit Category Selection -->
+                <div class="tool-input mb-2">
+                    <label for="categorySelect">Conversion Category</label>
+                    <select id="categorySelect">
+                        <option value="length">Length</option>
+                        <option value="weight">Weight</option>
+                        <option value="temperature">Temperature</option>
+                        <option value="volume">Volume</option>
+                    </select>
+                </div>
+
+                <!-- Conversion Interface -->
+                <div style="display: grid; gap: 2rem; grid-template-columns: 1fr auto 1fr; align-items: center;">
+                    <!-- From Unit -->
+                    <div>
+                        <div class="tool-input">
+                            <label for="fromUnit">From</label>
+                            <select id="fromUnit"></select>
+                        </div>
+                        <div class="tool-input">
+                            <input type="number" id="fromValue" placeholder="Enter value" step="any">
+                        </div>
+                    </div>
+
+                    <!-- Swap Button -->
+                    <div style="text-align: center;">
+                        <button id="swapUnits" class="btn btn-secondary" style="border-radius: 50%; width: 50px; height: 50px;">⇄</button>
+                    </div>
+
+                    <!-- To Unit -->
+                    <div>
+                        <div class="tool-input">
+                            <label for="toUnit">To</label>
+                            <select id="toUnit"></select>
+                        </div>
+                        <div class="tool-input">
+                            <input type="text" id="toValue" placeholder="Result" readonly style="background: #000000; color: #00aa00;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Conversions -->
+                <div id="quickConversions" class="mt-2">
+                    <h3>Quick Conversions</h3>
+                    <div id="quickList" style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>Conversion Information</h3>
+                    <div id="conversionInfo">
+                        <!-- Will be populated by JavaScript based on selected category -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        const conversions = {
+            length: {
+                name: 'Length',
+                units: {
+                    mm: { name: 'Millimeters', factor: 0.001 },
+                    cm: { name: 'Centimeters', factor: 0.01 },
+                    m: { name: 'Meters', factor: 1 },
+                    km: { name: 'Kilometers', factor: 1000 },
+                    inch: { name: 'Inches', factor: 0.0254 },
+                    ft: { name: 'Feet', factor: 0.3048 },
+                    yard: { name: 'Yards', factor: 0.9144 },
+                    mile: { name: 'Miles', factor: 1609.344 }
+                },
+                info: 'Length conversions are based on the meter as the base unit.',
+                quick: [
+                    { from: 1, fromUnit: 'inch', to: '2.54', toUnit: 'cm' },
+                    { from: 1, fromUnit: 'ft', to: '0.3048', toUnit: 'm' },
+                    { from: 1, fromUnit: 'mile', to: '1.609', toUnit: 'km' },
+                    { from: 1, fromUnit: 'yard', to: '0.914', toUnit: 'm' }
+                ]
+            },
+            weight: {
+                name: 'Weight',
+                units: {
+                    mg: { name: 'Milligrams', factor: 0.000001 },
+                    g: { name: 'Grams', factor: 0.001 },
+                    kg: { name: 'Kilograms', factor: 1 },
+                    oz: { name: 'Ounces', factor: 0.0283495 },
+                    lb: { name: 'Pounds', factor: 0.453592 },
+                    stone: { name: 'Stones', factor: 6.35029 },
+                    ton: { name: 'Metric Tons', factor: 1000 }
+                },
+                info: 'Weight conversions are based on the kilogram as the base unit.',
+                quick: [
+                    { from: 1, fromUnit: 'lb', to: '0.454', toUnit: 'kg' },
+                    { from: 1, fromUnit: 'oz', to: '28.35', toUnit: 'g' },
+                    { from: 1, fromUnit: 'stone', to: '6.35', toUnit: 'kg' },
+                    { from: 1, fromUnit: 'ton', to: '1000', toUnit: 'kg' }
+                ]
+            },
+            temperature: {
+                name: 'Temperature',
+                units: {
+                    c: { name: 'Celsius (°C)' },
+                    f: { name: 'Fahrenheit (°F)' },
+                    k: { name: 'Kelvin (K)' },
+                    r: { name: 'Rankine (°R)' }
+                },
+                info: 'Temperature conversions use specific formulas rather than simple factors.',
+                quick: [
+                    { from: 0, fromUnit: '°C', to: '32', toUnit: '°F' },
+                    { from: 100, fromUnit: '°C', to: '212', toUnit: '°F' },
+                    { from: 20, fromUnit: '°C', to: '68', toUnit: '°F' },
+                    { from: 0, fromUnit: '°C', to: '273.15', toUnit: 'K' }
+                ]
+            },
+            volume: {
+                name: 'Volume',
+                units: {
+                    ml: { name: 'Milliliters', factor: 0.001 },
+                    l: { name: 'Liters', factor: 1 },
+                    cup: { name: 'Cups (US)', factor: 0.236588 },
+                    pint: { name: 'Pints (US)', factor: 0.473176 },
+                    quart: { name: 'Quarts (US)', factor: 0.946353 },
+                    gallon: { name: 'Gallons (US)', factor: 3.78541 },
+                    floz: { name: 'Fluid Ounces (US)', factor: 0.0295735 }
+                },
+                info: 'Volume conversions are based on the liter as the base unit.',
+                quick: [
+                    { from: 1, fromUnit: 'gallon', to: '3.785', toUnit: 'l' },
+                    { from: 1, fromUnit: 'cup', to: '237', toUnit: 'ml' },
+                    { from: 1, fromUnit: 'pint', to: '473', toUnit: 'ml' },
+                    { from: 1, fromUnit: 'floz', to: '29.57', toUnit: 'ml' }
+                ]
+            }
+        };
+
+        ready(() => {
+            const categorySelect = document.getElementById('categorySelect');
+            const fromUnit = document.getElementById('fromUnit');
+            const toUnit = document.getElementById('toUnit');
+            const fromValue = document.getElementById('fromValue');
+            const toValue = document.getElementById('toValue');
+            const swapBtn = document.getElementById('swapUnits');
+            const quickList = document.getElementById('quickList');
+            const conversionInfo = document.getElementById('conversionInfo');
+
+            // Initialize
+            updateCategory();
+
+            // Event listeners
+            categorySelect.addEventListener('change', updateCategory);
+            fromUnit.addEventListener('change', convert);
+            toUnit.addEventListener('change', convert);
+            fromValue.addEventListener('input', convert);
+
+            addClickListener('swapUnits', () => {
+                const tempUnit = fromUnit.value;
+                const tempValue = fromValue.value;
+                
+                fromUnit.value = toUnit.value;
+                toUnit.value = tempUnit;
+                fromValue.value = toValue.value;
+                
+                convert();
+            });
+
+            function updateCategory() {
+                const category = categorySelect.value;
+                const data = conversions[category];
+                
+                // Update unit selectors
+                const unitOptions = Object.entries(data.units).map(([key, unit]) => 
+                    `<option value="${key}">${unit.name}</option>`
+                ).join('');
+                
+                fromUnit.innerHTML = unitOptions;
+                toUnit.innerHTML = unitOptions;
+                
+                // Set default units
+                const unitKeys = Object.keys(data.units);
+                fromUnit.value = unitKeys[0];
+                toUnit.value = unitKeys[1] || unitKeys[0];
+                
+                // Update info and quick conversions
+                updateInfo(data);
+                updateQuickConversions(data);
+                
+                // Clear values
+                fromValue.value = '';
+                toValue.value = '';
+            }
+
+            function convert() {
+                const category = categorySelect.value;
+                const fromUnitValue = fromUnit.value;
+                const toUnitValue = toUnit.value;
+                const value = parseFloat(fromValue.value);
+                
+                if (isNaN(value) || value === '') {
+                    toValue.value = '';
+                    return;
+                }
+
+                let result;
+                
+                if (category === 'temperature') {
+                    result = convertTemperature(value, fromUnitValue, toUnitValue);
+                } else {
+                    const data = conversions[category];
+                    const fromFactor = data.units[fromUnitValue].factor;
+                    const toFactor = data.units[toUnitValue].factor;
+                    result = (value * fromFactor) / toFactor;
+                }
+
+                toValue.value = formatResult(result);
+            }
+
+            function convertTemperature(value, from, to) {
+                // Convert to Celsius first
+                let celsius;
+                switch (from) {
+                    case 'c': celsius = value; break;
+                    case 'f': celsius = (value - 32) * 5/9; break;
+                    case 'k': celsius = value - 273.15; break;
+                    case 'r': celsius = (value - 491.67) * 5/9; break;
+                }
+
+                // Convert from Celsius to target
+                switch (to) {
+                    case 'c': return celsius;
+                    case 'f': return celsius * 9/5 + 32;
+                    case 'k': return celsius + 273.15;
+                    case 'r': return celsius * 9/5 + 491.67;
+                }
+            }
+
+            function formatResult(result) {
+                if (Math.abs(result) >= 1000000) {
+                    return result.toExponential(4);
+                } else if (Math.abs(result) < 0.0001 && result !== 0) {
+                    return result.toExponential(4);
+                } else {
+                    return parseFloat(result.toFixed(8)).toString();
+                }
+            }
+
+            function updateInfo(data) {
+                conversionInfo.innerHTML = `
+                    <p><strong>${data.name} Conversions:</strong> ${data.info}</p>
+                `;
+            }
+
+            function updateQuickConversions(data) {
+                const quickHtml = data.quick.map(item => `
+                    <div style="background: rgba(0, 255, 0, 0.05); border: 1px solid #00aa00; padding: 0.75rem; border-radius: 4px; font-size: 0.9rem; color: #00ff00;">
+                        <strong>${item.from} ${item.fromUnit}</strong> = <strong>${item.to} ${item.toUnit}</strong>
+                    </div>
+                `).join('');
+
+                quickList.innerHTML = quickHtml;
+            }
+
+            // Set initial value for demo
+            fromValue.value = '1';
+            convert();
+        });
+    </script>
+</body>
+</html>

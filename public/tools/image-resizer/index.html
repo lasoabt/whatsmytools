@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resize images online for free. Client-side image resizer with no upload required. Resize photos and images while maintaining quality.">
+    <meta name="keywords" content="image resizer online, resize image tool, photo resize without quality loss, image dimensions changer">
+    <title>Image Resizer - Resize Images Online Free | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">IMAGE.RESIZER.TOOL</h1>
+                <p class="tool-description">
+                    EXECUTE RESIZE_IMAGE_FILES() :: MODIFY.DIMENSIONS.LOCALLY :: CLIENT.SIDE.IMAGE.PROCESSING.ONLY
+                </p>
+
+                <!-- File Upload -->
+                <div class="tool-input">
+                    <label for="imageInput">Select Image File</label>
+                    <input type="file" id="imageInput" accept="image/*" style="padding: 0.75rem; border: 2px dashed #ddd; border-radius: 4px; width: 100%; text-align: center; cursor: pointer;">
+                    <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                        Supported formats: JPG, PNG, GIF, BMP, WebP
+                    </div>
+                </div>
+
+                <!-- Original Image Display -->
+                <div id="originalImage" class="hidden" style="margin: 2rem 0;">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Original Image</h3>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <img id="originalPreview" style="max-width: 100%; max-height: 300px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        </div>
+                        <div id="originalInfo" style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); font-size: 0.9rem;">
+                            <!-- Original image info will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resize Options -->
+                <div id="resizeOptions" class="hidden">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Resize Options</h3>
+                    
+                    <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 1rem;">
+                        <div class="tool-input">
+                            <label for="resizeMethod">Resize Method</label>
+                            <select id="resizeMethod">
+                                <option value="dimensions">Custom Dimensions</option>
+                                <option value="percentage">Percentage Scale</option>
+                                <option value="preset">Preset Sizes</option>
+                            </select>
+                        </div>
+                        
+                        <div class="tool-input">
+                            <label for="quality">Output Quality</label>
+                            <select id="quality">
+                                <option value="1.0">High (100%)</option>
+                                <option value="0.9" selected>Good (90%)</option>
+                                <option value="0.8">Medium (80%)</option>
+                                <option value="0.7">Low (70%)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Dimensions Method -->
+                    <div id="dimensionsMethod">
+                        <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-bottom: 1rem;">
+                            <div class="tool-input">
+                                <label for="newWidth">Width (px)</label>
+                                <input type="number" id="newWidth" min="1" placeholder="800">
+                            </div>
+                            <div class="tool-input">
+                                <label for="newHeight">Height (px)</label>
+                                <input type="number" id="newHeight" min="1" placeholder="600">
+                            </div>
+                        </div>
+                        <label style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <input type="checkbox" id="maintainRatio" checked style="margin-right: 0.5rem;">
+                            Maintain aspect ratio
+                        </label>
+                    </div>
+
+                    <!-- Percentage Method -->
+                    <div id="percentageMethod" class="hidden">
+                        <div class="tool-input" style="max-width: 300px;">
+                            <label for="scalePercentage">Scale Percentage</label>
+                            <input type="range" id="scalePercentage" min="10" max="200" value="100" 
+                                   oninput="document.getElementById('percentageDisplay').textContent = this.value + '%'">
+                            <div style="text-align: center; font-weight: bold; margin-top: 0.5rem;">
+                                <span id="percentageDisplay">100%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preset Method -->
+                    <div id="presetMethod" class="hidden">
+                        <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                            <button onclick="setPreset(640, 480)" class="btn btn-secondary">640×480 (SD)</button>
+                            <button onclick="setPreset(1280, 720)" class="btn btn-secondary">1280×720 (HD)</button>
+                            <button onclick="setPreset(1920, 1080)" class="btn btn-secondary">1920×1080 (FHD)</button>
+                            <button onclick="setPreset(800, 600)" class="btn btn-secondary">800×600</button>
+                            <button onclick="setPreset(1024, 768)" class="btn btn-secondary">1024×768</button>
+                            <button onclick="setPreset(1366, 768)" class="btn btn-secondary">1366×768</button>
+                        </div>
+                    </div>
+
+                    <div class="text-center" style="margin-top: 2rem;">
+                        <button id="resizeBtn" class="btn">EXECUTE.RESIZE</button>
+                    </div>
+                </div>
+
+                <!-- Resized Image Display -->
+                <div id="resizedImage" class="hidden" style="margin: 2rem 0;">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">Resized Image</h3>
+                    <div style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <img id="resizedPreview" style="max-width: 100%; max-height: 300px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        </div>
+                        <div id="resizedInfo" style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); font-size: 0.9rem; margin-bottom: 1rem;">
+                            <!-- Resized image info will be populated here -->
+                        </div>
+                        <div style="text-align: center;">
+                            <button id="downloadBtn" class="btn">Download Resized Image</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About Image Resizing</h3>
+                    <p>
+                        This tool resizes images completely in your browser using HTML5 Canvas technology. 
+                        Your images never leave your device, ensuring complete privacy and security.
+                    </p>
+                    
+                    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div>
+                            <h4>Supported Features</h4>
+                            <ul>
+                                <li>Custom width and height dimensions</li>
+                                <li>Percentage-based scaling</li>
+                                <li>Preset common resolutions</li>
+                                <li>Aspect ratio preservation</li>
+                                <li>Quality control for compression</li>
+                                <li>Multiple image format support</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Best Practices</h4>
+                            <ul>
+                                <li>Keep aspect ratio for natural-looking images</li>
+                                <li>Use high quality (90%+) for photos</li>
+                                <li>Lower quality for web thumbnails</li>
+                                <li>Consider file size vs. quality trade-offs</li>
+                                <li>Test different settings for optimal results</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: #000000; border-left: 4px solid #00ff00; padding: 1rem; margin-top: 1.5rem; color: #00aa00;">
+                        <strong>Privacy Guarantee:</strong> All image processing happens locally in your browser. 
+                        No images are uploaded to our servers or stored anywhere.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        let originalFile = null;
+        let originalImageData = null;
+
+        ready(() => {
+            const imageInput = document.getElementById('imageInput');
+            const originalImage = document.getElementById('originalImage');
+            const resizeOptions = document.getElementById('resizeOptions');
+            const resizedImage = document.getElementById('resizedImage');
+            const resizeMethod = document.getElementById('resizeMethod');
+            const dimensionsMethod = document.getElementById('dimensionsMethod');
+            const percentageMethod = document.getElementById('percentageMethod');
+            const presetMethod = document.getElementById('presetMethod');
+
+            imageInput.addEventListener('change', handleFileSelect);
+            resizeMethod.addEventListener('change', updateResizeMethod);
+            document.getElementById('maintainRatio').addEventListener('change', updateRatio);
+            document.getElementById('newWidth').addEventListener('input', updateRatio);
+            document.getElementById('newHeight').addEventListener('input', updateRatio);
+            
+            addClickListener('resizeBtn', resizeImage);
+            addClickListener('downloadBtn', downloadImage);
+
+            function handleFileSelect(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select a valid image file.');
+                    return;
+                }
+
+                originalFile = file;
+                loadImage(file);
+            }
+
+            function loadImage(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        originalImageData = {
+                            width: img.width,
+                            height: img.height,
+                            size: file.size,
+                            type: file.type,
+                            name: file.name
+                        };
+
+                        displayOriginalImage(e.target.result);
+                        setupResizeOptions();
+                        originalImage.classList.remove('hidden');
+                        resizeOptions.classList.remove('hidden');
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function displayOriginalImage(src) {
+                document.getElementById('originalPreview').src = src;
+                document.getElementById('originalInfo').innerHTML = `
+                    <div><strong>Dimensions:</strong> ${originalImageData.width} × ${originalImageData.height}</div>
+                    <div><strong>File Size:</strong> ${formatBytes(originalImageData.size)}</div>
+                    <div><strong>Format:</strong> ${originalImageData.type.replace('image/', '').toUpperCase()}</div>
+                    <div><strong>Aspect Ratio:</strong> ${(originalImageData.width / originalImageData.height).toFixed(2)}</div>
+                `;
+            }
+
+            function setupResizeOptions() {
+                document.getElementById('newWidth').value = originalImageData.width;
+                document.getElementById('newHeight').value = originalImageData.height;
+            }
+
+            function updateResizeMethod() {
+                dimensionsMethod.classList.add('hidden');
+                percentageMethod.classList.add('hidden');
+                presetMethod.classList.add('hidden');
+
+                switch(resizeMethod.value) {
+                    case 'dimensions':
+                        dimensionsMethod.classList.remove('hidden');
+                        break;
+                    case 'percentage':
+                        percentageMethod.classList.remove('hidden');
+                        break;
+                    case 'preset':
+                        presetMethod.classList.remove('hidden');
+                        break;
+                }
+            }
+
+            function updateRatio() {
+                if (!document.getElementById('maintainRatio').checked) return;
+                if (!originalImageData) return;
+
+                const newWidth = parseInt(document.getElementById('newWidth').value);
+                const newHeight = parseInt(document.getElementById('newHeight').value);
+                const aspectRatio = originalImageData.width / originalImageData.height;
+
+                // Update height when width changes
+                if (event.target.id === 'newWidth' && newWidth) {
+                    document.getElementById('newHeight').value = Math.round(newWidth / aspectRatio);
+                }
+                // Update width when height changes  
+                else if (event.target.id === 'newHeight' && newHeight) {
+                    document.getElementById('newWidth').value = Math.round(newHeight * aspectRatio);
+                }
+            }
+
+            function resizeImage() {
+                if (!originalFile || !originalImageData) {
+                    alert('Please select an image first.');
+                    return;
+                }
+
+                const dimensions = getTargetDimensions();
+                if (!dimensions) {
+                    alert('Please specify valid dimensions.');
+                    return;
+                }
+
+                showLoading(document.getElementById('resizeBtn'), 'PROCESSING.IMAGE...');
+
+                // Small delay to show loading state
+                setTimeout(() => {
+                    try {
+                        performResize(dimensions.width, dimensions.height);
+                    } catch (error) {
+                        alert('Error resizing image: ' + error.message);
+                    }
+                    hideLoading(document.getElementById('resizeBtn'), 'EXECUTE.RESIZE');
+                }, 100);
+            }
+
+            function getTargetDimensions() {
+                switch(resizeMethod.value) {
+                    case 'dimensions':
+                        const width = parseInt(document.getElementById('newWidth').value);
+                        const height = parseInt(document.getElementById('newHeight').value);
+                        if (width > 0 && height > 0) {
+                            return { width, height };
+                        }
+                        break;
+                    
+                    case 'percentage':
+                        const percentage = parseInt(document.getElementById('scalePercentage').value) / 100;
+                        return {
+                            width: Math.round(originalImageData.width * percentage),
+                            height: Math.round(originalImageData.height * percentage)
+                        };
+                    
+                    case 'preset':
+                        // Preset dimensions should be set via setPreset function
+                        const presetWidth = parseInt(document.getElementById('newWidth').value);
+                        const presetHeight = parseInt(document.getElementById('newHeight').value);
+                        if (presetWidth > 0 && presetHeight > 0) {
+                            return { width: presetWidth, height: presetHeight };
+                        }
+                        break;
+                }
+                return null;
+            }
+
+            function performResize(targetWidth, targetHeight) {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+
+                img.onload = function() {
+                    canvas.width = targetWidth;
+                    canvas.height = targetHeight;
+
+                    // Use high-quality scaling
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+
+                    // Draw resized image
+                    ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+                    // Get quality setting
+                    const quality = parseFloat(document.getElementById('quality').value);
+                    
+                    // Convert to blob and display
+                    canvas.toBlob(function(blob) {
+                        displayResizedImage(canvas.toDataURL(), blob, targetWidth, targetHeight);
+                    }, 'image/jpeg', quality);
+                };
+
+                img.src = document.getElementById('originalPreview').src;
+            }
+
+            function displayResizedImage(dataUrl, blob, width, height) {
+                document.getElementById('resizedPreview').src = dataUrl;
+                
+                const compressionRatio = ((originalImageData.size - blob.size) / originalImageData.size * 100).toFixed(1);
+                const sizeReduction = compressionRatio > 0 ? `${compressionRatio}% smaller` : `${Math.abs(compressionRatio)}% larger`;
+                
+                document.getElementById('resizedInfo').innerHTML = `
+                    <div><strong>New Dimensions:</strong> ${width} × ${height}</div>
+                    <div><strong>New File Size:</strong> ${formatBytes(blob.size)}</div>
+                    <div><strong>Size Change:</strong> ${sizeReduction}</div>
+                    <div><strong>Quality:</strong> ${(parseFloat(document.getElementById('quality').value) * 100)}%</div>
+                `;
+
+                // Store blob for download
+                window.resizedImageBlob = blob;
+                resizedImage.classList.remove('hidden');
+            }
+
+            function downloadImage() {
+                if (!window.resizedImageBlob) {
+                    alert('No resized image available for download.');
+                    return;
+                }
+
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(window.resizedImageBlob);
+                
+                const originalName = originalFile.name;
+                const nameWithoutExt = originalName.substring(0, originalName.lastIndexOf('.'));
+                const newDimensions = `${document.getElementById('newWidth').value}x${document.getElementById('newHeight').value}`;
+                
+                link.download = `${nameWithoutExt}_resized_${newDimensions}.jpg`;
+                link.click();
+
+                // Update button to show success
+                const downloadBtn = document.getElementById('downloadBtn');
+                const originalText = downloadBtn.textContent;
+                downloadBtn.textContent = 'Downloaded!';
+                downloadBtn.classList.add('btn-success');
+                setTimeout(() => {
+                    downloadBtn.textContent = originalText;
+                    downloadBtn.classList.remove('btn-success');
+                }, 2000);
+            }
+
+            // Global function for preset buttons
+            window.setPreset = (width, height) => {
+                if (originalImageData && document.getElementById('maintainRatio').checked) {
+                    const aspectRatio = originalImageData.width / originalImageData.height;
+                    const targetRatio = width / height;
+                    
+                    if (aspectRatio > targetRatio) {
+                        // Image is wider, fit to width
+                        height = Math.round(width / aspectRatio);
+                    } else {
+                        // Image is taller, fit to height
+                        width = Math.round(height * aspectRatio);
+                    }
+                }
+                
+                document.getElementById('newWidth').value = width;
+                document.getElementById('newHeight').value = height;
+            };
+
+            function formatBytes(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+        });
+    </script>
+</body>
+</html>

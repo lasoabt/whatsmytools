@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Encode and decode Base64 strings online. Free Base64 encoder and decoder tool with error handling and validation.">
+    <meta name="keywords" content="base64 encoder, base64 decoder, text to base64, base64 converter online">
+    <title>Base64 Encoder/Decoder - Online Base64 Converter | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">BASE64.ENCODER.DECODER</h1>
+                <p class="tool-description">
+                    EXECUTE ENCODE_DECODE_BASE64() :: CONVERT.TEXT.TO.BASE64.AND.REVERSE :: CLIENT.SIDE.PROCESSING.ONLY
+                </p>
+
+                <div style="display: grid; gap: 2rem; grid-template-columns: 1fr 1fr;">
+                    <!-- Encode Section -->
+                    <div>
+                        <h3 style="color: #667eea; margin-bottom: 1rem;">Encode to Base64</h3>
+                        <div class="tool-input">
+                            <label for="textInput">Enter text to encode</label>
+                            <textarea id="textInput" placeholder="Enter your text here..." rows="6"></textarea>
+                        </div>
+                        <button id="encodeBtn" class="btn mt-1">EXECUTE.ENCODE</button>
+                        
+                        <div id="encodeResult" class="result hidden mt-1">
+                            <div id="encodedDisplay"></div>
+                            <button id="copyEncoded" class="btn btn-secondary mt-1">COPY.ENCODED.TEXT</button>
+                        </div>
+                    </div>
+
+                    <!-- Decode Section -->
+                    <div>
+                        <h3 style="color: #667eea; margin-bottom: 1rem;">Decode from Base64</h3>
+                        <div class="tool-input">
+                            <label for="base64Input">Enter Base64 to decode</label>
+                            <textarea id="base64Input" placeholder="Enter Base64 string here..." rows="6"></textarea>
+                        </div>
+                        <button id="decodeBtn" class="btn mt-1">EXECUTE.DECODE</button>
+                        
+                        <div id="decodeResult" class="result hidden mt-1">
+                            <div id="decodedDisplay"></div>
+                            <button id="copyDecoded" class="btn btn-secondary mt-1">COPY.DECODED.TEXT</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="mt-2">
+                    <h3>Quick Actions</h3>
+                    <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                        <button onclick="setExampleText()" class="btn btn-secondary">LOAD.EXAMPLE.TEXT</button>
+                        <button onclick="clearAll()" class="btn btn-secondary">CLEAR.ALL</button>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About Base64 Encoding</h3>
+                    <p>
+                        Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. 
+                        It's commonly used to encode data that needs to be transmitted over protocols designed for text data, 
+                        such as email attachments, data URLs, and API tokens.
+                    </p>
+                    
+                    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div>
+                            <h4>Common Use Cases</h4>
+                            <ul>
+                                <li>Email attachments (MIME encoding)</li>
+                                <li>Data URLs in web development</li>
+                                <li>API authentication tokens</li>
+                                <li>Configuration file encoding</li>
+                                <li>Binary data transmission over text protocols</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Character Set</h4>
+                            <p>Base64 uses 64 characters:</p>
+                            <ul>
+                                <li>A-Z (26 characters)</li>
+                                <li>a-z (26 characters)</li>
+                                <li>0-9 (10 characters)</li>
+                                <li>+ and / (2 characters)</li>
+                                <li>= for padding</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: #000000; border-left: 4px solid #00ff00; padding: 1rem; margin-top: 1.5rem; color: #00aa00;">
+                        <strong>Privacy Notice:</strong> All encoding and decoding is performed locally in your browser. Your data is never sent to our servers.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        let lastEncodedValue = '';
+        let lastDecodedValue = '';
+
+        ready(() => {
+            const textInput = document.getElementById('textInput');
+            const base64Input = document.getElementById('base64Input');
+            const encodeBtn = document.getElementById('encodeBtn');
+            const decodeBtn = document.getElementById('decodeBtn');
+            const encodeResult = document.getElementById('encodeResult');
+            const decodeResult = document.getElementById('decodeResult');
+            const encodedDisplay = document.getElementById('encodedDisplay');
+            const decodedDisplay = document.getElementById('decodedDisplay');
+
+            addClickListener('encodeBtn', () => {
+                const text = textInput.value;
+                if (!text) {
+                    alert('Please enter some text to encode.');
+                    return;
+                }
+
+                showLoading(encodeBtn, 'ENCODING.DATA...');
+                encodeResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        const encoded = encodeBase64(text);
+                        displayEncodedResult(encoded, text);
+                    } catch (error) {
+                        displayResult('encodedDisplay', 'Error: ' + error.message, true);
+                        encodeResult.classList.remove('hidden');
+                    }
+                    hideLoading(encodeBtn, 'EXECUTE.ENCODE');
+                }, 200);
+            });
+
+            addClickListener('decodeBtn', () => {
+                const base64Text = base64Input.value;
+                if (!base64Text) {
+                    alert('Please enter a Base64 string to decode.');
+                    return;
+                }
+
+                showLoading(decodeBtn, 'DECODING.DATA...');
+                decodeResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        const decoded = decodeBase64(base64Text);
+                        displayDecodedResult(decoded, base64Text);
+                    } catch (error) {
+                        displayResult('decodedDisplay', 'Error: ' + error.message, true);
+                        decodeResult.classList.remove('hidden');
+                    }
+                    hideLoading(decodeBtn, 'EXECUTE.DECODE');
+                }, 200);
+            });
+
+            addClickListener('copyEncoded', () => {
+                if (lastEncodedValue) {
+                    copyToClipboard(lastEncodedValue, document.getElementById('copyEncoded'));
+                }
+            });
+
+            addClickListener('copyDecoded', () => {
+                if (lastDecodedValue) {
+                    copyToClipboard(lastDecodedValue, document.getElementById('copyDecoded'));
+                }
+            });
+
+            function displayEncodedResult(encoded, originalText) {
+                lastEncodedValue = encoded;
+                const html = `
+                    <h4 style="margin-bottom: 1rem;">Encoded Result</h4>
+                    <div style="background: #000000; border: 1px solid #00ff00; border-radius: 4px; padding: 1rem; margin-bottom: 1rem; color: #00aa00;">
+                        <div class="encoded-text" style="font-family: monospace; word-break: break-all; font-size: 0.9rem;">
+                            ${encoded}
+                        </div>
+                    </div>
+                    <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); font-size: 0.9rem;">
+                        <div><strong>Original length:</strong> ${originalText.length} characters</div>
+                        <div><strong>Encoded length:</strong> ${encoded.length} characters</div>
+                        <div><strong>Size increase:</strong> ${Math.round((encoded.length / originalText.length - 1) * 100)}%</div>
+                    </div>
+                `;
+
+                encodedDisplay.innerHTML = html;
+                encodeResult.classList.remove('hidden', 'result-error');
+                encodeResult.classList.add('result-success');
+            }
+
+            function displayDecodedResult(decoded, originalBase64) {
+                lastDecodedValue = decoded;
+                const html = `
+                    <h4 style="margin-bottom: 1rem;">Decoded Result</h4>
+                    <div style="background: #000000; border: 1px solid #00ff00; border-radius: 4px; padding: 1rem; margin-bottom: 1rem; color: #00aa00;">
+                        <div class="decoded-text" style="font-family: monospace; word-break: break-all; font-size: 0.9rem;">
+                            ${decoded}
+                        </div>
+                    </div>
+                    <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); font-size: 0.9rem;">
+                        <div><strong>Base64 length:</strong> ${originalBase64.length} characters</div>
+                        <div><strong>Decoded length:</strong> ${decoded.length} characters</div>
+                        <div><strong>Compression ratio:</strong> ${Math.round((decoded.length / originalBase64.length) * 100)}%</div>
+                    </div>
+                `;
+
+                decodedDisplay.innerHTML = html;
+                decodeResult.classList.remove('hidden', 'result-error');
+                decodeResult.classList.add('result-success');
+            }
+
+            // Global functions for quick actions
+            window.setExampleText = () => {
+                textInput.value = 'Hello, World! This is an example text for Base64 encoding. 🚀\nIt includes multiple lines and emoji characters.';
+                encodeBtn.click();
+            };
+
+            window.clearAll = () => {
+                textInput.value = '';
+                base64Input.value = '';
+                encodeResult.classList.add('hidden');
+                decodeResult.classList.add('hidden');
+            };
+
+
+            // Auto-encode if there's URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const textParam = urlParams.get('text');
+            if (textParam) {
+                textInput.value = decodeURIComponent(textParam);
+                encodeBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>

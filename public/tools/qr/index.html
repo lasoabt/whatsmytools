@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate QR codes from text or URLs for free. Online QR code generator with download options and customizable size.">
+    <meta name="keywords" content="qr code generator, create qr code online, free qr code tool, qr code maker">
+    <title>QR Code Generator - Create QR Codes Online | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">QR.CODE.GENERATOR</h1>
+                <p class="tool-description">
+                    EXECUTE GENERATE_QR_CODE() :: CREATE.SCANNABLE.MATRIX.CODES :: CLIENT.SIDE.QR.PROCESSING
+                </p>
+
+                <!-- Input Section -->
+                <div class="tool-input">
+                    <label for="qrInput">Text or URL to encode</label>
+                    <textarea id="qrInput" placeholder="Enter text, URL, email, phone number, or any data..." rows="4"></textarea>
+                </div>
+
+                <!-- Options -->
+                <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 2rem;">
+                    <div class="tool-input">
+                        <label for="qrSize">QR Code Size</label>
+                        <select id="qrSize">
+                            <option value="200">Small (200x200)</option>
+                            <option value="300" selected>Medium (300x300)</option>
+                            <option value="400">Large (400x400)</option>
+                            <option value="500">Extra Large (500x500)</option>
+                        </select>
+                    </div>
+
+                    <div class="tool-input">
+                        <label for="qrErrorCorrection">Error Correction Level</label>
+                        <select id="qrErrorCorrection">
+                            <option value="L">Low (~7%)</option>
+                            <option value="M" selected>Medium (~15%)</option>
+                            <option value="Q">Quartile (~25%)</option>
+                            <option value="H">High (~30%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="text-center mb-2">
+                    <button id="generateQR" class="btn">EXECUTE.QR.GENERATE</button>
+                    <button id="downloadQR" class="btn btn-secondary hidden">Download PNG</button>
+                </div>
+
+                <!-- QR Code Result -->
+                <div id="qrResult" class="result hidden">
+                    <div id="qrDisplay" class="text-center"></div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div id="quickActions" class="mt-2">
+                    <h3>Quick Actions</h3>
+                    <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                        <button onclick="setQuickText('https://www.example.com')" class="btn btn-secondary">Sample Website URL</button>
+                        <button onclick="setQuickText('mailto:contact@example.com')" class="btn btn-secondary">Email Address</button>
+                        <button onclick="setQuickText('tel:+1234567890')" class="btn btn-secondary">Phone Number</button>
+                        <button onclick="setQuickText('WIFI:T:WPA;S:NetworkName;P:password;;')" class="btn btn-secondary">WiFi Credentials</button>
+                    </div>
+                </div>
+
+                <!-- Information Section -->
+                <div class="mt-2">
+                    <h3>About QR Codes</h3>
+                    <p>
+                        QR (Quick Response) codes are two-dimensional barcodes that can store various types of information including URLs, text, contact information, and more. They can be easily scanned by smartphones and dedicated QR code readers.
+                    </p>
+                    
+                    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div>
+                            <h4>Common Use Cases</h4>
+                            <ul>
+                                <li>Website URLs and social media links</li>
+                                <li>Contact information (vCard format)</li>
+                                <li>WiFi network credentials</li>
+                                <li>Email addresses and phone numbers</li>
+                                <li>Event details and calendar entries</li>
+                                <li>Product information and tracking</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Error Correction Levels</h4>
+                            <ul>
+                                <li><strong>Low (L):</strong> ~7% damage recovery</li>
+                                <li><strong>Medium (M):</strong> ~15% damage recovery</li>
+                                <li><strong>Quartile (Q):</strong> ~25% damage recovery</li>
+                                <li><strong>High (H):</strong> ~30% damage recovery</li>
+                            </ul>
+                            <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+                                Higher error correction allows the QR code to be read even if parts are damaged or obscured, but makes the code more complex.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: #000000; border-left: 4px solid #00ff00; padding: 1rem; margin-top: 1.5rem; color: #00aa00;">
+                        <strong>Privacy Notice:</strong> All QR codes are generated locally in your browser. Your data never leaves your device or gets sent to our servers.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        let currentQRCanvas = null;
+
+        ready(() => {
+            const generateBtn = document.getElementById('generateQR');
+            const downloadBtn = document.getElementById('downloadQR');
+            const qrResult = document.getElementById('qrResult');
+            const qrDisplay = document.getElementById('qrDisplay');
+            const quickActions = document.getElementById('quickActions');
+
+            addClickListener('generateQR', () => {
+                const input = document.getElementById('qrInput').value.trim();
+                
+                if (!input) {
+                    alert('Please enter some text or URL to generate a QR code.');
+                    return;
+                }
+
+                showLoading(generateBtn, 'Generating...');
+                qrResult.classList.add('hidden');
+                downloadBtn.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        generateQRCode(input);
+                    } catch (error) {
+                        displayResult('qrDisplay', 'Error: ' + error.message, true);
+                        qrResult.classList.remove('hidden');
+                    }
+                    hideLoading(generateBtn, 'Generate QR Code');
+                }, 300);
+            });
+
+            addClickListener('downloadQR', () => {
+                if (currentQRCanvas) {
+                    downloadQRCode();
+                }
+            });
+
+            function generateQRCode(text) {
+                const size = parseInt(document.getElementById('qrSize').value);
+                const errorCorrectionLevel = document.getElementById('qrErrorCorrection').value;
+
+                try {
+                    // Use direct URL approach that bypasses CORS
+                    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}&ecc=${errorCorrectionLevel}`;
+                    
+                    // Create an img element to display the QR code directly
+                    const img = document.createElement('img');
+                    img.src = qrUrl;
+                    img.style.maxWidth = '100%';
+                    img.style.height = 'auto';
+                    
+                    img.onload = function() {
+                        displayQRCodeImage(img, text, size, qrUrl);
+                    };
+                    
+                    img.onerror = function() {
+                        displayResult('qrDisplay', 'Failed to generate QR code. Please check your internet connection and try again.', true);
+                        document.getElementById('qrResult').classList.remove('hidden');
+                    };
+                    
+                } catch (error) {
+                    displayResult('qrDisplay', 'Error generating QR code: ' + error.message, true);
+                    document.getElementById('qrResult').classList.remove('hidden');
+                }
+            }
+
+            function displayQRCodeImage(img, originalText, size, qrUrl) {
+                const html = `
+                    <div style="margin-bottom: 2rem;">
+                        <div style="display: inline-block; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                            ${img.outerHTML}
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: left; max-width: 600px; margin: 0 auto;">
+                        <h4 style="margin-bottom: 1rem;">QR Code Details</h4>
+                        <div style="display: grid; gap: 0.5rem; font-size: 0.9rem;">
+                            <div><strong>Content:</strong> <span style="word-break: break-all;">${originalText}</span></div>
+                            <div><strong>Size:</strong> ${size} × ${size} pixels</div>
+                            <div><strong>Error Correction:</strong> Level ${document.getElementById('qrErrorCorrection').value}</div>
+                            <div><strong>Data Length:</strong> ${originalText.length} characters</div>
+                        </div>
+                        
+                        <div style="margin-top: 1rem;">
+                            <a href="${qrUrl}" download="qrcode.png" class="btn">Download QR Code</a>
+                        </div>
+                        
+                        <div style="margin-top: 1rem; padding: 1rem; background: #000000; border-radius: 4px; font-size: 0.9rem; color: #00aa00; border: 1px solid #00ff00;">
+                            <strong>Tips for scanning:</strong>
+                            <ul style="margin: 0.5rem 0 0 1.5rem;">
+                                <li>Ensure good lighting when scanning</li>
+                                <li>Hold your device steady about 6-8 inches away</li>
+                                <li>Make sure the entire QR code is visible in your camera</li>
+                                <li>Clean your camera lens if scanning fails</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('qrDisplay').innerHTML = html;
+                document.getElementById('qrResult').classList.remove('hidden', 'result-error');
+                document.getElementById('qrResult').classList.add('result-success');
+                document.getElementById('quickActions').style.display = 'block';
+            }
+
+
+
+            function downloadQRCode() {
+                // The download is now handled by the download link in displayQRCodeImage
+                // This function is kept for compatibility but may not be used
+                if (currentQRCanvas) {
+                    const link = document.createElement('a');
+                    link.download = 'qrcode.png';
+                    link.href = currentQRCanvas.toDataURL();
+                    link.click();
+                    
+                    // Update button to show success
+                    const downloadBtn = document.getElementById('downloadQR');
+                    const originalText = downloadBtn.textContent;
+                    downloadBtn.textContent = 'Downloaded!';
+                    downloadBtn.classList.add('btn-success');
+                    setTimeout(() => {
+                        downloadBtn.textContent = originalText;
+                        downloadBtn.classList.remove('btn-success');
+                    }, 2000);
+                }
+            }
+
+            // Global function for quick actions
+            window.setQuickText = (text) => {
+                document.getElementById('qrInput').value = text;
+                generateBtn.click();
+            };
+
+            // Auto-generate if there's default text
+            const defaultText = new URLSearchParams(window.location.search).get('text');
+            if (defaultText) {
+                document.getElementById('qrInput').value = decodeURIComponent(defaultText);
+                generateBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check your browser version and see if it's up to date. Browser version checker with update recommendations and security information.">
+    <meta name="keywords" content="browser version checker, what browser am i using, whats my browser version, check browser info online">
+    <title>Browser Version Checker - What Browser Am I Using | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">BROWSER.VERSION.DETECTOR</h1>
+                <p class="tool-description">
+                    EXECUTE DETECT_BROWSER_VERSION() :: ANALYZE.CLIENT.SOFTWARE :: CHECK.UPDATE.STATUS.SECURITY
+                </p>
+
+                <div class="text-center mb-2">
+                    <button id="checkBrowser" class="btn">EXECUTE.BROWSER.SCAN</button>
+                </div>
+
+                <div id="browserResult" class="result hidden">
+                    <div id="browserDisplay"></div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>Why Keep Your Browser Updated</h3>
+                    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div>
+                            <h4>Security Benefits</h4>
+                            <ul>
+                                <li>Protection against known vulnerabilities</li>
+                                <li>Enhanced privacy controls</li>
+                                <li>Better protection against malicious websites</li>
+                                <li>Improved encryption standards</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Performance & Features</h4>
+                            <ul>
+                                <li>Faster page loading and JavaScript execution</li>
+                                <li>Support for modern web standards</li>
+                                <li>Better memory management</li>
+                                <li>New developer tools and APIs</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4>Compatibility</h4>
+                            <ul>
+                                <li>Access to modern websites and features</li>
+                                <li>Support for new web technologies</li>
+                                <li>Better mobile and responsive design support</li>
+                                <li>Improved accessibility features</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: #000000; border-left: 4px solid #00ff00; padding: 1rem; margin-top: 1.5rem; color: #00aa00;">
+                        <strong>Tip:</strong> Most modern browsers update automatically, but it's good practice to check periodically and restart your browser to ensure you have the latest version.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        ready(() => {
+            const checkBtn = document.getElementById('checkBrowser');
+            const browserResult = document.getElementById('browserResult');
+            const browserDisplay = document.getElementById('browserDisplay');
+
+            addClickListener('checkBrowser', () => {
+                showLoading(checkBtn, 'SCANNING.BROWSER...');
+                browserResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        const browserInfo = getBrowserInfo();
+                        displayBrowserInfo(browserInfo);
+                    } catch (error) {
+                        displayResult('browserDisplay', 'Error: ' + error.message, true);
+                        browserResult.classList.remove('hidden');
+                    }
+                    hideLoading(checkBtn, 'REFRESH.SCAN');
+                }, 300);
+            });
+
+            function getBrowserInfo() {
+                const userAgent = navigator.userAgent;
+                const parsed = parseUserAgent(userAgent);
+                
+                return {
+                    name: parsed.browser,
+                    version: parsed.browserVersion,
+                    fullVersion: getFullVersion(userAgent),
+                    engine: getEngine(userAgent),
+                    platform: navigator.platform,
+                    cookieEnabled: navigator.cookieEnabled,
+                    javaEnabled: typeof java !== 'undefined',
+                    onLine: navigator.onLine,
+                    language: navigator.language,
+                    languages: navigator.languages,
+                    plugins: getPluginInfo(),
+                    features: getSupportedFeatures(),
+                    updateStatus: getUpdateStatus(parsed.browser, parsed.browserVersion),
+                    security: getSecurityFeatures()
+                };
+            }
+
+            function getFullVersion(userAgent) {
+                // Modern Edge (Chromium-based) detection first
+                if (userAgent.includes('Edg/')) {
+                    const match = userAgent.match(/Edg\/([0-9.]+)/);
+                    return match ? match[1] : 'Unknown';
+                }
+                
+                const versionRegexes = {
+                    Chrome: /Chrome\/([0-9.]+)/,
+                    Firefox: /Firefox\/([0-9.]+)/,
+                    Safari: /Version\/([0-9.]+)/,
+                    Edge: /Edge\/([0-9.]+)/, // Legacy Edge
+                    Opera: /Opera\/([0-9.]+)/
+                };
+
+                for (const [browser, regex] of Object.entries(versionRegexes)) {
+                    if (userAgent.includes(browser)) {
+                        const match = userAgent.match(regex);
+                        return match ? match[1] : 'Unknown';
+                    }
+                }
+                return 'Unknown';
+            }
+
+            function getEngine(userAgent) {
+                if (userAgent.includes('Gecko') && userAgent.includes('Firefox')) return 'Gecko';
+                if (userAgent.includes('WebKit')) {
+                    if (userAgent.includes('Chrome') || userAgent.includes('Edge')) return 'Blink';
+                    return 'WebKit';
+                }
+                if (userAgent.includes('Trident')) return 'Trident';
+                return 'Unknown';
+            }
+
+            function getPluginInfo() {
+                const plugins = [];
+                for (let i = 0; i < navigator.plugins.length; i++) {
+                    plugins.push(navigator.plugins[i].name);
+                }
+                return plugins;
+            }
+
+            function getSupportedFeatures() {
+                return {
+                    webGL: hasWebGL(),
+                    webGL2: hasWebGL2(),
+                    localStorage: hasLocalStorage(),
+                    sessionStorage: hasSessionStorage(),
+                    indexedDB: hasIndexedDB(),
+                    webWorkers: hasWebWorkers(),
+                    serviceWorkers: hasServiceWorkers(),
+                    webAssembly: hasWebAssembly(),
+                    webRTC: hasWebRTC(),
+                    geolocation: hasGeolocation()
+                };
+            }
+
+            function getUpdateStatus(browser, version) {
+                // This is a simplified check - in reality you'd need to call an API
+                const currentYear = new Date().getFullYear();
+                const versionNumber = parseInt(version);
+                
+                if (browser === 'Google Chrome' && versionNumber >= 120) return { status: 'up-to-date', message: 'Your Chrome browser appears to be current' };
+                if (browser === 'Mozilla Firefox' && versionNumber >= 115) return { status: 'up-to-date', message: 'Your Firefox browser appears to be current' };
+                if (browser === 'Safari' && versionNumber >= 17) return { status: 'up-to-date', message: 'Your Safari browser appears to be current' };
+                if (browser === 'Microsoft Edge' && versionNumber >= 120) return { status: 'up-to-date', message: 'Your Edge browser appears to be current' };
+                
+                return { status: 'outdated', message: 'Your browser may be outdated. Consider checking for updates.' };
+            }
+
+            function getSecurityFeatures() {
+                return {
+                    https: location.protocol === 'https:',
+                    secureContext: window.isSecureContext,
+                    doNotTrack: navigator.doNotTrack,
+                    cookieEnabled: navigator.cookieEnabled
+                };
+            }
+
+            function displayBrowserInfo(info) {
+                const isUpToDate = info.updateStatus.status === 'up-to-date';
+                const statusColor = isUpToDate ? '#28a745' : '#dc3545';
+                const statusIcon = isUpToDate ? '✓' : '⚠️';
+
+                const html = `
+                    <div>
+                        <!-- Browser Overview -->
+                        <div style="text-align: center; background: rgba(0, 255, 0, 0.1); color: #00ff00; padding: 2rem; border: 2px solid #00ff00; margin-bottom: 2rem;">
+                            <h2 style="margin: 0 0 0.5rem 0; font-size: 2.5rem; text-shadow: 0 0 10px #00ff00; font-family: 'Courier Prime', monospace;">${info.name.toUpperCase()}</h2>
+                            <p style="margin: 0 0 1rem 0; font-size: 1.3rem; color: #00aa00; font-family: 'Courier Prime', monospace;">VERSION.${info.version}</p>
+                            <div style="background: rgba(0, 255, 0, 0.05); padding: 1rem; margin-top: 1rem; border: 1px solid #00ff00;">
+                                <span style="font-size: 1.5rem; margin-right: 0.5rem;">${statusIcon}</span>
+                                <span style="color: ${isUpToDate ? '#00ff00' : '#ff0000'}; font-weight: bold; font-family: 'Courier Prime', monospace;">
+                                    ${info.updateStatus.status === 'up-to-date' ? 'UP.TO.DATE' : 'UPDATE.RECOMMENDED'}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Detailed Information -->
+                        <div style="display: grid; gap: 2rem;">
+                            <!-- Basic Info -->
+                            <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                                <h3 style="color: #00ff00; margin-bottom: 1rem; border-bottom: 2px solid #00ff00; padding-bottom: 0.5rem; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">
+                                    BROWSER.DETAILS
+                                </h3>
+                                <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); font-family: 'Courier Prime', monospace;">
+                                    <div><span style="color: #00ff00;">VERSION:</span> ${info.fullVersion}</div>
+                                    <div><span style="color: #00ff00;">ENGINE:</span> ${info.engine}</div>
+                                    <div><span style="color: #00ff00;">PLATFORM:</span> ${info.platform}</div>
+                                    <div><span style="color: #00ff00;">LANGUAGE:</span> ${info.language}</div>
+                                </div>
+                            </div>
+
+                            <!-- Update Status -->
+                            <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                                <h3 style="color: #00ff00; margin-bottom: 1rem; border-bottom: 2px solid #00ff00; padding-bottom: 0.5rem; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">
+                                    UPDATE.STATUS
+                                </h3>
+                                <div style="background: #000000; border: 2px solid #00ff00; padding: 1rem; color: #00aa00;">
+                                    <div style="color: ${isUpToDate ? '#00ff00' : '#ff0000'}; font-family: 'Courier Prime', monospace;">
+                                        <span style="text-shadow: 0 0 5px ${isUpToDate ? '#00ff00' : '#ff0000'};"><strong>${statusIcon} ${info.updateStatus.message.toUpperCase()}</strong></span>
+                                    </div>
+                                    ${!isUpToDate ? `
+                                        <div style="margin-top: 1rem; font-family: 'Courier Prime', monospace;">
+                                            <span style="color: #00ff00;">UPDATE.INSTRUCTIONS:</span>
+                                            <ul style="margin-left: 1rem; margin-top: 0.5rem; color: #00aa00;">
+                                                <li><span style="color: #00ff00;">CHROME:</span> Settings → About Chrome</li>
+                                                <li><span style="color: #00ff00;">FIREFOX:</span> Help → About Firefox</li>
+                                                <li><span style="color: #00ff00;">SAFARI:</span> System Preferences → Software Update</li>
+                                                <li><span style="color: #00ff00;">EDGE:</span> Settings → About Microsoft Edge</li>
+                                            </ul>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+
+                            <!-- Security Features -->
+                            <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                                <h3 style="color: #00ff00; margin-bottom: 1rem; border-bottom: 2px solid #00ff00; padding-bottom: 0.5rem; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">
+                                    SECURITY.FEATURES
+                                </h3>
+                                <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); font-family: 'Courier Prime', monospace;">
+                                    <div><span style="color: #00ff00;">HTTPS:</span> ${info.security.https ? '[✓] ENABLED' : '[✗] DISABLED'}</div>
+                                    <div><span style="color: #00ff00;">SECURE.CTX:</span> ${info.security.secureContext ? '[✓] YES' : '[✗] NO'}</div>
+                                    <div><span style="color: #00ff00;">COOKIES:</span> ${info.cookieEnabled ? '[✓] ENABLED' : '[✗] DISABLED'}</div>
+                                    <div><span style="color: #00ff00;">DNT:</span> ${info.security.doNotTrack ? info.security.doNotTrack : 'NOT.SET'}</div>
+                                </div>
+                            </div>
+
+                            <!-- Supported Features -->
+                            <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                                <h3 style="color: #00ff00; margin-bottom: 1rem; border-bottom: 2px solid #00ff00; padding-bottom: 0.5rem; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">
+                                    WEB.FEATURES
+                                </h3>
+                                <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); font-family: 'Courier Prime', monospace;">
+                                    <div><span style="color: #00ff00;">WEBGL:</span> ${info.features.webGL ? '[✓] SUPPORTED' : '[✗] UNSUPPORTED'}</div>
+                                    <div><span style="color: #00ff00;">STORAGE:</span> ${info.features.localStorage ? '[✓] AVAILABLE' : '[✗] UNAVAILABLE'}</div>
+                                    <div><span style="color: #00ff00;">SERVICE.W:</span> ${info.features.serviceWorkers ? '[✓] SUPPORTED' : '[✗] UNSUPPORTED'}</div>
+                                    <div><span style="color: #00ff00;">WEB.WORKERS:</span> ${info.features.webWorkers ? '[✓] SUPPORTED' : '[✗] UNSUPPORTED'}</div>
+                                    <div><span style="color: #00ff00;">WASM:</span> ${info.features.webAssembly ? '[✓] SUPPORTED' : '[✗] UNSUPPORTED'}</div>
+                                    <div><span style="color: #00ff00;">GEO:</span> ${info.features.geolocation ? '[✓] AVAILABLE' : '[✗] UNAVAILABLE'}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                browserDisplay.innerHTML = html;
+                browserResult.classList.remove('hidden', 'result-error');
+                browserResult.classList.add('result-success');
+            }
+
+            // Feature detection functions
+            function hasWebGL() {
+                try {
+                    const canvas = document.createElement('canvas');
+                    return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+                } catch (e) { return false; }
+            }
+
+            function hasWebGL2() {
+                try {
+                    const canvas = document.createElement('canvas');
+                    return !!canvas.getContext('webgl2');
+                } catch (e) { return false; }
+            }
+
+            function hasLocalStorage() {
+                try { return typeof localStorage !== 'undefined'; } catch (e) { return false; }
+            }
+
+            function hasSessionStorage() {
+                try { return typeof sessionStorage !== 'undefined'; } catch (e) { return false; }
+            }
+
+            function hasIndexedDB() {
+                return 'indexedDB' in window;
+            }
+
+            function hasWebWorkers() {
+                return typeof Worker !== 'undefined';
+            }
+
+            function hasServiceWorkers() {
+                return 'serviceWorker' in navigator;
+            }
+
+            function hasWebAssembly() {
+                return typeof WebAssembly === 'object';
+            }
+
+            function hasWebRTC() {
+                return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.mediaDevices);
+            }
+
+            function hasGeolocation() {
+                return 'geolocation' in navigator;
+            }
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare two texts and highlight differences online. Free text diff tool to find changes, additions, and deletions between documents.">
+    <meta name="keywords" content="text diff tool, compare text online, difference checker, online text comparer">
+    <title>Text Diff Tool - Compare Text Online | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">TEXT.DIFF.TOOL</h1>
+                <p class="tool-description">
+                    EXECUTE COMPARE_TEXT_DATA() :: HIGHLIGHT.DIFFERENCES :: ANALYZE.ADDITIONS.DELETIONS.CHANGES
+                </p>
+
+                <div style="display: grid; gap: 1rem; grid-template-columns: 1fr 1fr;">
+                    <!-- Left Text -->
+                    <div>
+                        <h3 style="color: #667eea; margin-bottom: 1rem;">Original Text</h3>
+                        <div class="tool-input">
+                            <textarea id="leftText" placeholder="Enter original text here..." rows="15"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Right Text -->
+                    <div>
+                        <h3 style="color: #667eea; margin-bottom: 1rem;">Modified Text</h3>
+                        <div class="tool-input">
+                            <textarea id="rightText" placeholder="Enter modified text here..." rows="15"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin: 1rem 0;">
+                    <button id="compareBtn" class="btn">EXECUTE.COMPARE</button>
+                    <button id="clearBtn" class="btn btn-secondary">CLEAR.ALL</button>
+                    <button id="exampleBtn" class="btn btn-secondary">LOAD.EXAMPLE</button>
+                </div>
+
+                <!-- Results -->
+                <div id="diffResult" class="hidden">
+                    <!-- Statistics -->
+                    <div id="diffStats" style="background: #000000; padding: 1rem; border-radius: 4px; margin-bottom: 1rem; color: #00aa00; border: 1px solid #00ff00;">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Side by side comparison -->
+                    <div style="display: grid; gap: 1rem; grid-template-columns: 1fr 1fr;">
+                        <div>
+                            <h4 style="color: #667eea; margin-bottom: 0.5rem;">Original Text</h4>
+                            <div id="leftDiff" style="background: #000000; border: 1px solid #00ff00; border-radius: 4px; padding: 1rem; min-height: 200px; font-family: monospace; white-space: pre-wrap; line-height: 1.6; color: #00aa00;"></div>
+                        </div>
+                        <div>
+                            <h4 style="color: #667eea; margin-bottom: 0.5rem;">Modified Text</h4>
+                            <div id="rightDiff" style="background: #000000; border: 1px solid #00ff00; border-radius: 4px; padding: 1rem; min-height: 200px; font-family: monospace; white-space: pre-wrap; line-height: 1.6; color: #00aa00;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.9rem;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="background: #ffcccc; padding: 2px 4px; margin-right: 0.5rem;">■</span>
+                            Deleted lines
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <span style="background: #ccffcc; padding: 2px 4px; margin-right: 0.5rem;">■</span>
+                            Added lines
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About Text Comparison</h3>
+                    <p>
+                        This tool compares two texts line by line and highlights the differences. 
+                        It's useful for reviewing document changes, comparing code versions, or tracking edits in any text content.
+                    </p>
+                    
+                    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div>
+                            <h4>How It Works</h4>
+                            <ul>
+                                <li>Texts are compared line by line</li>
+                                <li>Differences are highlighted with colors</li>
+                                <li>Red background shows deleted content</li>
+                                <li>Green background shows added content</li>
+                                <li>Yellow background shows modified content</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Features</h4>
+                            <ul>
+                                <li><strong>Character precision:</strong> Shows exact character differences</li>
+                                <li><strong>Visual highlighting:</strong> Clear color coding for different change types</li>
+                                <li><strong>Line-by-line display:</strong> Organized comparison format</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script src="../../libs/diff.min.js"></script>
+    <script>
+        ready(() => {
+            const leftText = document.getElementById('leftText');
+            const rightText = document.getElementById('rightText');
+            const compareBtn = document.getElementById('compareBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const exampleBtn = document.getElementById('exampleBtn');
+            const diffResult = document.getElementById('diffResult');
+            const diffStats = document.getElementById('diffStats');
+            const leftDiff = document.getElementById('leftDiff');
+            const rightDiff = document.getElementById('rightDiff');
+
+            addClickListener('compareBtn', () => {
+                const left = leftText.value;
+                const right = rightText.value;
+                
+                if (!left && !right) {
+                    alert('Please enter text in both fields to compare.');
+                    return;
+                }
+
+                showLoading(compareBtn, 'EXECUTING.COMPARE...');
+                diffResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    const result = compareTexts(left, right);
+                    displayDiff(result);
+                    hideLoading(compareBtn, 'EXECUTE.COMPARE');
+                }, 200);
+            });
+
+            addClickListener('clearBtn', () => {
+                leftText.value = '';
+                rightText.value = '';
+                diffResult.classList.add('hidden');
+            });
+
+            addClickListener('exampleBtn', () => {
+                leftText.value = `Hello World!
+This is line 2.
+This is line 3.
+This line will be removed.
+This is the last line.`;
+
+                rightText.value = `Hello World!
+This is line 2 with changes.
+This is line 3.
+This is a new line.
+This is the last line.`;
+
+                compareBtn.click();
+            });
+
+            function compareTexts(left, right) {
+                // Use character-level diff for precise highlighting
+                const diffResult = Diff.diffChars(left, right);
+                
+                // Convert character diff to line-based display
+                const leftResult = [];
+                const rightResult = [];
+                let leftContent = '';
+                let rightContent = '';
+                
+                // Build the highlighted content
+                
+                for (const part of diffResult) {
+                    if (part.added) {
+                        rightContent += `<span style="background-color: #00ff00; color: #000000; font-weight: bold;">${escapeHtml(part.value)}</span>`;
+                    } else if (part.removed) {
+                        leftContent += `<span style="background-color: #ff0000; color: #ffffff; text-decoration: line-through; font-weight: bold;">${escapeHtml(part.value)}</span>`;
+                    } else {
+                        // Unchanged text
+                        const escapedValue = escapeHtml(part.value);
+                        leftContent += escapedValue;
+                        rightContent += escapedValue;
+                    }
+                }
+                
+                // Split into lines for display
+                const leftLines = leftContent.split('\n');
+                const rightLines = rightContent.split('\n');
+                const maxLines = Math.max(leftLines.length, rightLines.length);
+                
+                // Calculate stats
+                let additions = diffResult.filter(p => p.added).reduce((acc, p) => acc + p.value.length, 0);
+                let deletions = diffResult.filter(p => p.removed).reduce((acc, p) => acc + p.value.length, 0);
+                let modifications = additions > 0 && deletions > 0 ? 1 : 0;
+                
+                // Create line objects
+                for (let i = 0; i < maxLines; i++) {
+                    const leftLine = leftLines[i] || '';
+                    const rightLine = rightLines[i] || '';
+                    
+                    leftResult.push({
+                        text: leftLine,
+                        type: leftLine === rightLine ? 'equal' : 'modified',
+                        lineNumber: i + 1,
+                        isHtml: true
+                    });
+                    
+                    rightResult.push({
+                        text: rightLine,
+                        type: leftLine === rightLine ? 'equal' : 'modified',
+                        lineNumber: i + 1,
+                        isHtml: true
+                    });
+                }
+                
+                return {
+                    left: leftResult,
+                    right: rightResult,
+                    stats: { additions, deletions, modifications }
+                };
+            }
+
+
+
+            function displayDiff(result) {
+                // Display statistics
+                const totalChanges = result.stats.additions + result.stats.deletions + result.stats.modifications;
+                diffStats.innerHTML = `
+                    <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                        <div><strong>Total Changes:</strong> ${totalChanges}</div>
+                        <div><strong>Additions:</strong> <span style="color: #28a745;">${result.stats.additions}</span></div>
+                        <div><strong>Deletions:</strong> <span style="color: #dc3545;">${result.stats.deletions}</span></div>
+                        <div><strong>Modifications:</strong> <span style="color: #ffc107;">${result.stats.modifications}</span></div>
+                    </div>
+                `;
+
+                // Display left side
+                leftDiff.innerHTML = result.left.map((line, index) => 
+                    formatLine(line, index + 1)
+                ).join('\n');
+
+                // Display right side
+                rightDiff.innerHTML = result.right.map((line, index) => 
+                    formatLine(line, index + 1)
+                ).join('\n');
+
+                diffResult.classList.remove('hidden');
+            }
+
+            function formatLine(line, lineNumber) {
+                const lineNumStyle = 'color: #999; font-size: 0.8em; margin-right: 1rem; user-select: none;';
+                let content = '';
+                
+                if (line.type === 'empty') {
+                    content = '<span style="color: #ccc;"> </span>';
+                } else if (line.isHtml) {
+                    // Content already has HTML highlighting from character diff
+                    content = line.text || ' ';
+                } else {
+                    // Full line highlighting for additions/deletions
+                    let style = '';
+                    switch (line.type) {
+                        case 'deleted':
+                            style = 'background-color: #ffcccc;';
+                            break;
+                        case 'added':
+                            style = 'background-color: #ccffcc;';
+                            break;
+                        case 'equal':
+                            style = '';
+                            break;
+                    }
+                    content = `<span style="${style}">${escapeHtml(line.text) || ' '}</span>`;
+                }
+
+                const displayLineNumber = line.lineNumber ? line.lineNumber.toString().padStart(3, ' ') : lineNumber.toString().padStart(3, ' ');
+                return `<span style="${lineNumStyle}">${displayLineNumber}</span>${content}`;
+            }
+
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        });
+    </script>
+</body>
+</html>

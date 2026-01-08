@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WHOIS domain lookup tool. Check domain registration information, registrar, expiration date, and name servers for any domain.">
+    <meta name="keywords" content="whois lookup, domain whois checker, who owns this domain, domain registration info, free whois tool">
+    <title>WHOIS Lookup - Domain Registration Information | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">WHOIS.DOMAIN.LOOKUP</h1>
+                <p class="tool-description">
+                    Get detailed domain registration information including registrar, creation date, expiration date, name servers, and contact details for any domain.
+                </p>
+
+                <div class="tool-input">
+                    <label for="domainInput">Domain Name</label>
+                    <input type="text" id="domainInput" placeholder="Enter domain name...">
+                </div>
+
+                <div class="text-center mb-2">
+                    <button id="whoisBtn" class="btn">EXECUTE.WHOIS.QUERY</button>
+                    <button id="copyResults" class="btn btn-secondary hidden">Copy Results</button>
+                </div>
+
+                <div id="whoisResult" class="result hidden">
+                    <div id="whoisDisplay"></div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About WHOIS</h3>
+                    <p>
+                        WHOIS is a query protocol used to look up information about domain name registrations. 
+                        It provides details about who registered a domain, when it was registered, and when it expires.
+                    </p>
+                    
+                    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div>
+                            <h4>Information Available</h4>
+                            <ul>
+                                <li>Domain registrar and registration date</li>
+                                <li>Expiration date and renewal information</li>
+                                <li>Name servers (DNS hosting)</li>
+                                <li>Domain status codes</li>
+                                <li>Contact information (if not private)</li>
+                                <li>Last update date</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Common Use Cases</h4>
+                            <ul>
+                                <li>Check domain availability and expiration</li>
+                                <li>Research domain ownership</li>
+                                <li>Verify contact information</li>
+                                <li>Investigate suspicious domains</li>
+                                <li>Domain portfolio management</li>
+                                <li>Legal and compliance research</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(0, 255, 0, 0.05); border: 2px solid #00ff00; padding: 1rem; margin-top: 1.5rem; color: #00aa00;">
+                        <strong>Privacy Note:</strong> Many domains use privacy protection services that hide personal contact information. In such cases, you'll see the privacy service's contact details instead of the actual registrant's information.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        let lastResults = '';
+
+        ready(() => {
+            const domainInput = document.getElementById('domainInput');
+            const whoisBtn = document.getElementById('whoisBtn');
+            const copyResults = document.getElementById('copyResults');
+            const whoisResult = document.getElementById('whoisResult');
+            const whoisDisplay = document.getElementById('whoisDisplay');
+
+            addClickListener('whoisBtn', async () => {
+                const domain = domainInput.value.trim();
+
+                if (!domain) {
+                    alert('Please enter a domain name.');
+                    return;
+                }
+
+                if (!isValidDomain(domain)) {
+                    alert('Please enter a valid domain name.');
+                    return;
+                }
+
+                showLoading(whoisBtn, 'Looking up...');
+                whoisResult.classList.add('hidden');
+                copyResults.classList.add('hidden');
+
+                try {
+                    const whoisData = await performWhoisLookup(domain);
+                    displayWhoisResults(whoisData, domain);
+                    copyResults.classList.remove('hidden');
+                } catch (error) {
+                    displayResult('whoisDisplay', 'Error: ' + error.message, true);
+                    whoisResult.classList.remove('hidden');
+                }
+
+                hideLoading(whoisBtn, 'Lookup WHOIS Info');
+            });
+
+            addClickListener('copyResults', () => {
+                if (lastResults) {
+                    copyToClipboard(lastResults, copyResults);
+                }
+            });
+
+            async function performWhoisLookup(domain) {
+                // Since direct WHOIS queries aren't possible from browsers due to CORS,
+                // we'll simulate the response for demonstration purposes
+                // In a real implementation, you'd use a WHOIS API service
+                
+                try {
+                    // This would typically call a WHOIS API service
+                    return getSimulatedWhoisData(domain);
+                } catch (error) {
+                    throw new Error('WHOIS lookup failed. Please try again later.');
+                }
+            }
+
+            function getSimulatedWhoisData(domain) {
+                throw new Error('WHOIS lookup requires a backend API service. This is a client-side demo tool that cannot perform actual WHOIS queries due to browser security restrictions.');
+            }
+
+            function displayWhoisResults(data, domain) {
+                const daysUntilExpiration = Math.ceil((new Date(data.expirationDate) - new Date()) / (1000 * 60 * 60 * 24));
+                const expirationWarning = daysUntilExpiration < 30 ? 'warning' : daysUntilExpiration < 90 ? 'info' : 'success';
+                const expirationColor = expirationWarning === 'warning' ? '#dc3545' : expirationWarning === 'info' ? '#ffc107' : '#28a745';
+
+                const html = `
+                    <div>
+                        <h3 style="margin-bottom: 1rem;">WHOIS Information for ${domain}</h3>
+                        
+                        <!-- Key Information -->
+                        <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom: 2rem;">
+                            <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                                <h4 style="color: #00ff00; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">REGISTRATION.DETAILS</h4>
+                                <div style="display: grid; gap: 0.5rem; font-family: 'Courier Prime', monospace;">
+                                    <div><span style="color: #00ff00;">REGISTRAR:</span> ${data.registrar}</div>
+                                    <div><span style="color: #00ff00;">CREATED:</span> ${formatDate(data.creationDate)}</div>
+                                    <div><span style="color: #00ff00;">UPDATED:</span> ${formatDate(data.updatedDate)}</div>
+                                    <div><span style="color: #00ff00;">STATUS:</span> ${data.status.join(', ')}</div>
+                                </div>
+                            </div>
+
+                            <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                                <h4 style="color: #00ff00; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">EXPIRATION.INFO</h4>
+                                <div style="display: grid; gap: 0.5rem; font-family: 'Courier Prime', monospace;">
+                                    <div><span style="color: #00ff00;">EXPIRES:</span> <span style="color: ${expirationColor}; font-weight: bold;">${formatDate(data.expirationDate)}</span></div>
+                                    <div><span style="color: #00ff00;">DAYS.LEFT:</span> <span style="color: ${expirationColor}; font-weight: bold;">${daysUntilExpiration} days</span></div>
+                                    <div><span style="color: #00ff00;">DNSSEC:</span> ${data.dnssec}</div>
+                                </div>
+                                ${daysUntilExpiration < 30 ? '<div style="color: #dc3545; font-weight: bold; margin-top: 0.5rem;">⚠️ Domain expires soon!</div>' : ''}
+                            </div>
+                        </div>
+
+                        <!-- Name Servers -->
+                        <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00; margin-bottom: 1.5rem;">
+                            <h4 style="color: #00ff00; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">NAME.SERVERS</h4>
+                            <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                ${data.nameServers.map(ns => `<div style="font-family: 'Courier Prime', monospace; background: #000000; padding: 0.5rem; color: #00aa00; border: 2px solid #00ff00;">${ns}</div>`).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00; margin-bottom: 1.5rem;">
+                            <h4 style="color: #00ff00; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">CONTACT.INFO</h4>
+                            <div style="display: grid; gap: 0.5rem; font-family: 'Courier Prime', monospace;">
+                                <div><span style="color: #00ff00;">REGISTRANT:</span> ${data.registrantOrg}</div>
+                                <div><span style="color: #00ff00;">COUNTRY:</span> ${data.registrantCountry}</div>
+                                <div><span style="color: #00ff00;">ADMIN:</span> ${data.adminContact}</div>
+                                <div><span style="color: #00ff00;">TECH:</span> ${data.techContact}</div>
+                            </div>
+                            <div style="margin-top: 1rem; padding: 0.5rem; background: #000000; font-size: 0.9rem; color: #00aa00; border: 2px solid #00ff00; font-family: 'Courier Prime', monospace;">
+                                <span style="color: #00ff00;">NOTE:</span> Contact details may be hidden by privacy protection services.
+                            </div>
+                        </div>
+
+                        <!-- Raw WHOIS Data -->
+                        <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                            <h4 style="color: #00ff00; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">RAW.WHOIS.DATA</h4>
+                            <pre style="background: #000000; padding: 1rem; overflow-x: auto; font-size: 0.8rem; line-height: 1.4; color: #00aa00; border: 2px solid #00ff00; font-family: 'Courier Prime', monospace;">${data.rawData}</pre>
+                        </div>
+                    </div>
+                `;
+
+                // Prepare text for copying
+                lastResults = `WHOIS Information for ${domain}
+${'='.repeat(50)}
+
+Registration Details:
+- Registrar: ${data.registrar}
+- Creation Date: ${formatDate(data.creationDate)}
+- Updated Date: ${formatDate(data.updatedDate)}
+- Expiration Date: ${formatDate(data.expirationDate)}
+- Days Until Expiry: ${daysUntilExpiration} days
+- Status: ${data.status.join(', ')}
+- DNSSEC: ${data.dnssec}
+
+Name Servers:
+${data.nameServers.map(ns => `- ${ns}`).join('\n')}
+
+Contact Information:
+- Registrant: ${data.registrantOrg}
+- Country: ${data.registrantCountry}
+- Admin Contact: ${data.adminContact}
+- Tech Contact: ${data.techContact}
+
+Raw WHOIS Data:
+${'-'.repeat(30)}
+${data.rawData}
+
+Generated by WhatsMyTools.com`;
+
+                whoisDisplay.innerHTML = html;
+                whoisResult.classList.remove('hidden', 'result-error');
+                whoisResult.classList.add('result-success');
+            }
+
+            function formatDate(dateString) {
+                return new Date(dateString).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
+
+            function isValidDomain(domain) {
+                const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]?(\.[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]?)*$/;
+                return domainRegex.test(domain) && domain.length <= 253;
+            }
+
+        });
+    </script>
+</body>
+</html>

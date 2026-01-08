@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Online ping test tool to check website speed and latency. Test network connectivity and response times to any host or domain.">
+    <meta name="keywords" content="ping test online, website ping checker, latency test, check website speed ping, network ping tool">
+    <title>Ping Test - Online Network Latency Checker | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">PING.NETWORK.TOOL</h1>
+                <p class="tool-description">
+                    EXECUTE PING_NETWORK_HOST() :: MEASURE.LATENCY.RESPONSE.TIMES :: CLIENT.SIDE.NETWORK.TESTING
+                </p>
+
+                <div style="display: grid; gap: 1rem; grid-template-columns: 2fr 1fr;">
+                    <div class="tool-input">
+                        <label for="hostInput">Host or Domain</label>
+                        <input type="text" id="hostInput" placeholder="Enter domain or IP...">
+                    </div>
+                    <div class="tool-input">
+                        <label for="pingCount">Number of Pings</label>
+                        <select id="pingCount">
+                            <option value="4">4 pings</option>
+                            <option value="8" selected>8 pings</option>
+                            <option value="16">16 pings</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-center mb-2">
+                    <button id="pingBtn" class="btn">EXECUTE.PING.TEST</button>
+                    <button id="stopBtn" class="btn btn-secondary hidden">TERMINATE.TEST</button>
+                </div>
+
+                <div id="pingProgress" class="hidden" style="margin-bottom: 1rem;">
+                    <div style="background: #000000; padding: 1rem; color: #00aa00; border: 2px solid #00ff00;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-family: 'Courier Prime', monospace;">
+                            <span style="color: #00ff00;">PROGRESS:</span>
+                            <span id="progressText" style="color: #00ff00;">0/0</span>
+                        </div>
+                        <div style="background: #000000; height: 20px; border: 2px solid #00ff00; overflow: hidden;">
+                            <div id="progressBar" style="background: #00ff00; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pingResult" class="result hidden">
+                    <div id="pingDisplay"></div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About Network Ping Testing</h3>
+                    <p>
+                        A ping test measures the time it takes for a small packet of data to travel from your device to a target server and back. 
+                        It's useful for diagnosing network connectivity issues and measuring network performance.
+                    </p>
+                    
+                    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div>
+                            <h4>Understanding Results</h4>
+                            <ul>
+                                <li><strong>&lt; 50ms:</strong> Excellent connection</li>
+                                <li><strong>50-100ms:</strong> Good connection</li>
+                                <li><strong>100-200ms:</strong> Average connection</li>
+                                <li><strong>&gt; 200ms:</strong> Slow connection</li>
+                                <li><strong>Timeout:</strong> No response received</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Factors Affecting Latency</h4>
+                            <ul>
+                                <li>Physical distance to server</li>
+                                <li>Network congestion</li>
+                                <li>Internet service provider quality</li>
+                                <li>Server response time</li>
+                                <li>Routing path complexity</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: #000000; border-left: 4px solid #00ff00; padding: 1rem; margin-top: 1.5rem; color: #00aa00;">
+                        <strong>Note:</strong> This browser-based ping test measures HTTP response times rather than traditional ICMP ping packets. Results may differ slightly from command-line ping tools.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        let pingResults = [];
+        let currentPingIndex = 0;
+        let totalPings = 0;
+        let isRunning = false;
+
+        ready(() => {
+            const hostInput = document.getElementById('hostInput');
+            const pingCount = document.getElementById('pingCount');
+            const pingBtn = document.getElementById('pingBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const pingProgress = document.getElementById('pingProgress');
+            const progressText = document.getElementById('progressText');
+            const progressBar = document.getElementById('progressBar');
+            const pingResult = document.getElementById('pingResult');
+            const pingDisplay = document.getElementById('pingDisplay');
+
+            addClickListener('pingBtn', async () => {
+                const host = hostInput.value.trim();
+                const count = parseInt(pingCount.value);
+
+                if (!host) {
+                    alert('Please enter a host or domain name.');
+                    return;
+                }
+
+                if (!isValidHost(host)) {
+                    alert('Please enter a valid host or domain name.');
+                    return;
+                }
+
+                startPingTest(host, count);
+            });
+
+            addClickListener('stopBtn', () => {
+                stopPingTest();
+            });
+
+            async function startPingTest(host, count) {
+                isRunning = true;
+                pingResults = [];
+                currentPingIndex = 0;
+                totalPings = count;
+
+                // Reset UI
+                pingBtn.classList.add('hidden');
+                stopBtn.classList.remove('hidden');
+                pingProgress.classList.remove('hidden');
+                pingResult.classList.add('hidden');
+                
+                updateProgress(0, totalPings);
+
+                // Normalize host for testing
+                const testUrl = normalizeHost(host);
+
+                for (let i = 0; i < count && isRunning; i++) {
+                    currentPingIndex = i + 1;
+                    updateProgress(currentPingIndex, totalPings);
+
+                    const result = await performPing(testUrl, host, i + 1);
+                    pingResults.push(result);
+
+                    // Small delay between pings
+                    if (i < count - 1 && isRunning) {
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                    }
+                }
+
+                if (isRunning) {
+                    displayResults(host);
+                }
+
+                stopPingTest();
+            }
+
+            function stopPingTest() {
+                isRunning = false;
+                pingBtn.classList.remove('hidden');
+                stopBtn.classList.add('hidden');
+                pingProgress.classList.add('hidden');
+            }
+
+            function updateProgress(current, total) {
+                const percentage = (current / total) * 100;
+                progressText.textContent = `${current}/${total}`;
+                progressBar.style.width = `${percentage}%`;
+            }
+
+            async function performPing(url, originalHost, pingNumber) {
+                const startTime = performance.now();
+                
+                try {
+                    // Use fetch with no-cache to get actual network timing
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        cache: 'no-cache',
+                        mode: 'no-cors' // Allow cross-origin requests
+                    });
+                    
+                    const endTime = performance.now();
+                    const responseTime = Math.round(endTime - startTime);
+                    
+                    return {
+                        pingNumber,
+                        time: responseTime,
+                        status: 'success',
+                        statusText: 'Reply'
+                    };
+                } catch (error) {
+                    const endTime = performance.now();
+                    const responseTime = Math.round(endTime - startTime);
+                    
+                    return {
+                        pingNumber,
+                        time: responseTime > 5000 ? 'timeout' : responseTime,
+                        status: 'error',
+                        statusText: 'Timeout'
+                    };
+                }
+            }
+
+            function normalizeHost(host) {
+                // Add protocol if not present
+                if (!host.startsWith('http://') && !host.startsWith('https://')) {
+                    return `https://${host}`;
+                }
+                return host;
+            }
+
+            function displayResults(host) {
+                const successfulPings = pingResults.filter(r => r.status === 'success');
+                const timeouts = pingResults.filter(r => r.status === 'error');
+                
+                let minTime = 0, maxTime = 0, avgTime = 0;
+                
+                if (successfulPings.length > 0) {
+                    const times = successfulPings.map(r => r.time);
+                    minTime = Math.min(...times);
+                    maxTime = Math.max(...times);
+                    avgTime = Math.round(times.reduce((a, b) => a + b, 0) / times.length);
+                }
+
+                const packetLoss = Math.round((timeouts.length / pingResults.length) * 100);
+                const connectionQuality = getConnectionQuality(avgTime, packetLoss);
+
+                let html = `
+                    <h3 style="margin-bottom: 1rem; color: #00ff00; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">PING.RESULTS.FOR ${host.toUpperCase()}</h3>
+                    
+                    <!-- Summary -->
+                    <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 2rem;">
+                        <div style="background: #000000; padding: 1rem; border: 2px solid #00ff00; text-align: center; color: #00aa00;">
+                            <div style="color: #00ff00; font-weight: bold; font-size: 1.5rem; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">${avgTime}ms</div>
+                            <div style="color: #00aa00; font-size: 0.9rem; font-family: 'Courier Prime', monospace;">AVG.TIME</div>
+                        </div>
+                        <div style="background: #000000; padding: 1rem; border: 2px solid #00ff00; text-align: center; color: #00aa00;">
+                            <div style="color: #00ff00; font-weight: bold; font-size: 1.5rem; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">${minTime}ms</div>
+                            <div style="color: #00aa00; font-size: 0.9rem; font-family: 'Courier Prime', monospace;">MIN.TIME</div>
+                        </div>
+                        <div style="background: #000000; padding: 1rem; border: 2px solid #00ff00; text-align: center; color: #00aa00;">
+                            <div style="color: #00ff00; font-weight: bold; font-size: 1.5rem; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">${maxTime}ms</div>
+                            <div style="color: #00aa00; font-size: 0.9rem; font-family: 'Courier Prime', monospace;">MAX.TIME</div>
+                        </div>
+                        <div style="background: #000000; padding: 1rem; border: 2px solid #00ff00; text-align: center; color: #00aa00;">
+                            <div style="color: ${packetLoss > 0 ? '#ff0000' : '#00ff00'}; font-weight: bold; font-size: 1.5rem; text-shadow: 0 0 5px ${packetLoss > 0 ? '#ff0000' : '#00ff00'}; font-family: 'Courier Prime', monospace;">${packetLoss}%</div>
+                            <div style="color: #00aa00; font-size: 0.9rem; font-family: 'Courier Prime', monospace;">PKT.LOSS</div>
+                        </div>
+                    </div>
+
+                    <!-- Connection Quality -->
+                    <div style="background: rgba(0, 255, 0, 0.1); color: #00ff00; padding: 1rem; border: 2px solid #00ff00; text-align: center; margin-bottom: 2rem;">
+                        <div style="font-size: 1.2rem; font-weight: bold; font-family: 'Courier Prime', monospace; text-shadow: 0 0 5px #00ff00;">${connectionQuality.status.toUpperCase().replace(/ /g, '.')}</div>
+                        <div style="color: #00aa00; font-family: 'Courier Prime', monospace;">${connectionQuality.description}</div>
+                    </div>
+
+                    <!-- Individual Ping Results -->
+                    <div style="background: #000000; padding: 1rem; border: 2px solid #00ff00; color: #00aa00;">
+                        <h4 style="margin: 0 0 1rem 0; color: #00ff00; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">INDIVIDUAL.PING.RESULTS</h4>
+                        <div style="font-family: 'Courier Prime', monospace; line-height: 1.6;">
+                `;
+
+                pingResults.forEach(result => {
+                    const timeDisplay = result.time === 'timeout' ? 'Request timeout' : `time=${result.time}ms`;
+                    const statusColor = result.status === 'success' ? '#28a745' : '#dc3545';
+                    
+                    html += `
+                        <div style="padding: 0.25rem 0; border-bottom: 1px solid #00ff00;">
+                            <span style="color: ${result.status === 'success' ? '#00ff00' : '#ff0000'};">PING.${result.pingNumber}:</span> 
+                            REPLY.FROM.${host.toUpperCase()}: ${timeDisplay.toUpperCase()}
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+
+                pingDisplay.innerHTML = html;
+                pingResult.classList.remove('hidden', 'result-error');
+                pingResult.classList.add('result-success');
+            }
+
+            function getConnectionQuality(avgTime, packetLoss) {
+                if (packetLoss > 10) {
+                    return {
+                        status: 'Poor Connection',
+                        description: 'High packet loss detected',
+                        color: '#dc3545'
+                    };
+                } else if (avgTime < 50) {
+                    return {
+                        status: 'Excellent Connection',
+                        description: 'Very low latency',
+                        color: '#28a745'
+                    };
+                } else if (avgTime < 100) {
+                    return {
+                        status: 'Good Connection',
+                        description: 'Low latency',
+                        color: '#28a745'
+                    };
+                } else if (avgTime < 200) {
+                    return {
+                        status: 'Average Connection',
+                        description: 'Moderate latency',
+                        color: '#ffc107'
+                    };
+                } else {
+                    return {
+                        status: 'Slow Connection',
+                        description: 'High latency',
+                        color: '#dc3545'
+                    };
+                }
+            }
+
+            function isValidHost(host) {
+                // Remove protocol for validation
+                const cleanHost = host.replace(/^https?:\/\//, '');
+                const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9.-]{0,61}[a-zA-Z0-9]?(\.[a-zA-Z]{2,})?$/;
+                const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+                
+                return domainRegex.test(cleanHost) || ipRegex.test(cleanHost);
+            }
+
+        });
+    </script>
+</body>
+</html>

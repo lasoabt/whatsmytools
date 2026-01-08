@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check your screen resolution, viewport size, and display information. Free online screen resolution checker and monitor resolution test tool.">
+    <meta name="keywords" content="screen resolution checker, whats my screen resolution, detect screen size, display resolution online, monitor resolution test">
+    <title>Screen Resolution Checker - What's My Screen Resolution | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">SCREEN.RESOLUTION.DETECTOR</h1>
+                <p class="tool-description">
+                    Instantly check your screen resolution, browser viewport size, and display properties. Perfect for web developers and designers who need to know exact screen dimensions.
+                </p>
+
+                <div class="text-center mb-2">
+                    <button id="checkResolution" class="btn">EXECUTE.SCREEN.SCAN</button>
+                    <button id="copyResolution" class="btn btn-secondary hidden">Copy Resolution Info</button>
+                </div>
+
+                <div id="resolutionResult" class="result hidden">
+                    <div id="resolutionDisplay"></div>
+                </div>
+
+                <div id="liveResolution" class="mt-2" style="display: none;">
+                    <h3>Live Viewport Monitor</h3>
+                    <p style="font-family: monospace; font-size: 1.1rem; background: #000000; padding: 1rem; border-radius: 4px; text-align: center; color: #00aa00; border: 1px solid #00ff00;" id="liveSize">
+                        Resize your browser window to see live updates
+                    </p>
+                </div>
+
+                <div class="mt-2">
+                    <h3>Understanding Screen Resolution</h3>
+                    <p>
+                        Screen resolution refers to the number of pixels your display can show, typically expressed as width × height (e.g., 1920×1080). 
+                        This tool shows both your physical screen resolution and your browser's viewport size, which may be different due to browser chrome, toolbars, and zoom levels.
+                    </p>
+                    
+                    <h4>Common Resolution Categories</h4>
+                    <ul>
+                        <li><strong>HD (720p):</strong> 1280×720 pixels</li>
+                        <li><strong>Full HD (1080p):</strong> 1920×1080 pixels</li>
+                        <li><strong>2K:</strong> 2560×1440 pixels</li>
+                        <li><strong>4K (2160p):</strong> 3840×2160 pixels</li>
+                        <li><strong>5K:</strong> 5120×2880 pixels</li>
+                        <li><strong>8K:</strong> 7680×4320 pixels</li>
+                    </ul>
+
+                    <h4>Device Pixel Ratio</h4>
+                    <p>
+                        Modern high-density displays (like Retina displays) have a device pixel ratio greater than 1, meaning they pack more physical pixels into each logical pixel for sharper images.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        let resolutionData = null;
+
+        ready(() => {
+            const checkBtn = document.getElementById('checkResolution');
+            const copyBtn = document.getElementById('copyResolution');
+            const resolutionResult = document.getElementById('resolutionResult');
+            const resolutionDisplay = document.getElementById('resolutionDisplay');
+            const liveResolution = document.getElementById('liveResolution');
+            const liveSize = document.getElementById('liveSize');
+
+            addClickListener('checkResolution', () => {
+                showLoading(checkBtn, 'Checking...');
+                resolutionResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        resolutionData = getResolutionInfo();
+                        displayResolutionInfo(resolutionData);
+                        copyBtn.classList.remove('hidden');
+                        liveResolution.style.display = 'block';
+                        startLiveMonitoring();
+                    } catch (error) {
+                        displayResult('resolutionDisplay', 'Error: ' + error.message, true);
+                        resolutionResult.classList.remove('hidden');
+                    }
+
+                    hideLoading(checkBtn, 'Refresh Resolution Info');
+                }, 300);
+            });
+
+            addClickListener('copyResolution', () => {
+                if (resolutionData) {
+                    const formattedInfo = formatResolutionForCopy(resolutionData);
+                    copyToClipboard(formattedInfo, copyBtn);
+                }
+            });
+
+            function getResolutionInfo() {
+                const screenWidth = screen.width;
+                const screenHeight = screen.height;
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                const devicePixelRatio = window.devicePixelRatio || 1;
+                
+                // Calculate actual resolution considering pixel ratio
+                const actualWidth = screenWidth * devicePixelRatio;
+                const actualHeight = screenHeight * devicePixelRatio;
+
+                // Classify resolution
+                const classification = classifyResolution(screenWidth, screenHeight);
+
+                return {
+                    screen: {
+                        width: screenWidth,
+                        height: screenHeight,
+                        resolution: `${screenWidth} × ${screenHeight}`
+                    },
+                    actual: {
+                        width: Math.round(actualWidth),
+                        height: Math.round(actualHeight),
+                        resolution: `${Math.round(actualWidth)} × ${Math.round(actualHeight)}`
+                    },
+                    viewport: {
+                        width: viewportWidth,
+                        height: viewportHeight,
+                        resolution: `${viewportWidth} × ${viewportHeight}`
+                    },
+                    display: {
+                        devicePixelRatio: devicePixelRatio,
+                        colorDepth: screen.colorDepth,
+                        pixelDepth: screen.pixelDepth,
+                        orientation: screen.orientation ? screen.orientation.type : 'Unknown'
+                    },
+                    classification: classification,
+                    aspectRatio: calculateAspectRatio(screenWidth, screenHeight)
+                };
+            }
+
+            function classifyResolution(width, height) {
+                const totalPixels = width * height;
+                
+                if (width >= 7680 && height >= 4320) return '8K Ultra HD';
+                if (width >= 5120 && height >= 2880) return '5K';
+                if (width >= 3840 && height >= 2160) return '4K Ultra HD (2160p)';
+                if (width >= 2560 && height >= 1440) return '2K (1440p)';
+                if (width >= 1920 && height >= 1080) return 'Full HD (1080p)';
+                if (width >= 1366 && height >= 768) return 'HD+ (768p)';
+                if (width >= 1280 && height >= 720) return 'HD (720p)';
+                if (width >= 1024 && height >= 768) return 'XGA';
+                return 'Standard Definition';
+            }
+
+            function calculateAspectRatio(width, height) {
+                const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+                const divisor = gcd(width, height);
+                const ratioW = width / divisor;
+                const ratioH = height / divisor;
+                
+                // Check for common ratios
+                const ratio = width / height;
+                if (Math.abs(ratio - 16/9) < 0.01) return '16:9 (Widescreen)';
+                if (Math.abs(ratio - 16/10) < 0.01) return '16:10';
+                if (Math.abs(ratio - 4/3) < 0.01) return '4:3 (Standard)';
+                if (Math.abs(ratio - 21/9) < 0.01) return '21:9 (Ultrawide)';
+                if (Math.abs(ratio - 32/9) < 0.01) return '32:9 (Super Ultrawide)';
+                
+                return `${ratioW}:${ratioH}`;
+            }
+
+            function displayResolutionInfo(info) {
+                const html = `
+                    <div style="display: grid; gap: 2rem;">
+                        <!-- Main Resolution Display -->
+                        <div style="text-align: center; background: rgba(0, 255, 0, 0.1); color: #00ff00; padding: 2rem; border: 2px solid #00ff00;">
+                            <h2 style="margin: 0 0 1rem 0; font-size: 2.5rem; text-shadow: 0 0 10px #00ff00; font-family: 'Courier Prime', monospace;">${info.screen.resolution}</h2>
+                            <p style="margin: 0; font-size: 1.2rem; color: #00aa00;">${info.classification}</p>
+                            <p style="margin: 0.5rem 0 0 0; color: #00aa00;">Aspect Ratio: ${info.aspectRatio}</p>
+                        </div>
+
+                        <!-- Detailed Information -->
+                        <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                            <!-- Screen Resolution -->
+                            <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                                <h3 style="color: #00ff00; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">SCREEN.RESOLUTION</h3>
+                                <div style="display: grid; gap: 0.5rem; font-size: 0.9rem; font-family: 'Courier Prime', monospace;">
+                                    <div><span style="color: #00ff00;">LOGICAL:</span> ${info.screen.resolution}</div>
+                                    <div><span style="color: #00ff00;">PHYSICAL:</span> ${info.actual.resolution}</div>
+                                    <div><span style="color: #00ff00;">PIXEL.RATIO:</span> ${info.display.devicePixelRatio}x</div>
+                                </div>
+                            </div>
+
+                            <!-- Browser Viewport -->
+                            <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                                <h3 style="color: #00ff00; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">BROWSER.VIEWPORT</h3>
+                                <div style="display: grid; gap: 0.5rem; font-size: 0.9rem; font-family: 'Courier Prime', monospace;">
+                                    <div><span style="color: #00ff00;">SIZE:</span> ${info.viewport.resolution}</div>
+                                    <div><span style="color: #00ff00;">WIDTH:</span> ${info.viewport.width}px</div>
+                                    <div><span style="color: #00ff00;">HEIGHT:</span> ${info.viewport.height}px</div>
+                                </div>
+                            </div>
+
+                            <!-- Display Properties -->
+                            <div style="background: #000000; padding: 1.5rem; border: 2px solid #00ff00; color: #00aa00;">
+                                <h3 style="color: #00ff00; margin: 0 0 1rem 0; text-shadow: 0 0 5px #00ff00; font-family: 'Courier Prime', monospace;">DISPLAY.PROPERTIES</h3>
+                                <div style="display: grid; gap: 0.5rem; font-size: 0.9rem; font-family: 'Courier Prime', monospace;">
+                                    <div><span style="color: #00ff00;">COLOR.DEPTH:</span> ${info.display.colorDepth} bit</div>
+                                    <div><span style="color: #00ff00;">PIXEL.DEPTH:</span> ${info.display.pixelDepth} bit</div>
+                                    <div><span style="color: #00ff00;">ORIENTATION:</span> ${info.display.orientation}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                resolutionDisplay.innerHTML = html;
+                resolutionResult.classList.remove('hidden', 'result-error');
+                resolutionResult.classList.add('result-success');
+            }
+
+            function formatResolutionForCopy(info) {
+                return `SCREEN RESOLUTION INFORMATION
+============================
+
+Screen Resolution: ${info.screen.resolution}
+Classification: ${info.classification}
+Aspect Ratio: ${info.aspectRatio}
+
+Physical Resolution: ${info.actual.resolution}
+Device Pixel Ratio: ${info.display.devicePixelRatio}x
+
+Browser Viewport: ${info.viewport.resolution}
+Color Depth: ${info.display.colorDepth} bit
+Pixel Depth: ${info.display.pixelDepth} bit
+Orientation: ${info.display.orientation}
+
+Generated by WhatsMyTools.com`;
+            }
+
+            function startLiveMonitoring() {
+                function updateLiveSize() {
+                    const width = window.innerWidth;
+                    const height = window.innerHeight;
+                    liveSize.textContent = `Live Viewport: ${width} × ${height}`;
+                }
+                
+                updateLiveSize();
+                window.addEventListener('resize', updateLiveSize);
+            }
+
+            // Auto-check on page load
+            checkBtn.click();
+        });
+    </script>
+</body>
+</html>

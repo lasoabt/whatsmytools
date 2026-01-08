@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check your device information including browser, operating system, screen resolution, and hardware details. Free online device checker tool.">
+    <meta name="keywords" content="whats my device, device info checker, browser device information, system info online, check my device details">
+    <title>Device Information Checker - What's My Device | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">DEVICE.INFO.SCANNER</h1>
+                <p class="tool-description">
+                    EXECUTE SCAN_HARDWARE_SPECS() :: ANALYZE.DEVICE.BROWSER.OS.SPECIFICATIONS :: CLIENT.SIDE.PROCESSING.ONLY
+                </p>
+
+                <div class="text-center mb-2">
+                    <button id="detectDevice" class="btn">EXECUTE.DEVICE.SCAN</button>
+                    <button id="copyDeviceInfo" class="btn btn-secondary hidden">COPY.ALL.DATA</button>
+                </div>
+
+                <div id="deviceResult" class="result hidden">
+                    <div id="deviceDisplay"></div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About Device Detection</h3>
+                    <p>
+                        This tool analyzes your browser's user agent string and available JavaScript APIs to determine information about your device, browser, and operating system. All analysis is performed locally in your browser - no data is sent to external servers.
+                    </p>
+                    
+                    <h4>Information Detected</h4>
+                    <ul>
+                        <li><strong>Device Type:</strong> Desktop, Mobile, or Tablet</li>
+                        <li><strong>Operating System:</strong> Name and version where available</li>
+                        <li><strong>Browser:</strong> Name and version</li>
+                        <li><strong>Hardware:</strong> CPU cores, memory info (if available), screen details</li>
+                        <li><strong>Language & Location:</strong> Preferred languages and timezone</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        let deviceInfoData = null;
+
+        ready(() => {
+            const detectBtn = document.getElementById('detectDevice');
+            const copyBtn = document.getElementById('copyDeviceInfo');
+            const deviceResult = document.getElementById('deviceResult');
+            const deviceDisplay = document.getElementById('deviceDisplay');
+
+            addClickListener('detectDevice', () => {
+                showLoading(detectBtn, 'SCANNING.HARDWARE...');
+                deviceResult.classList.add('hidden');
+
+                // Small delay to show loading state
+                setTimeout(() => {
+                    try {
+                        const deviceInfo = getDeviceInfo();
+                        const parsedUA = parseUserAgent();
+                        
+                        deviceInfoData = {
+                            ...deviceInfo,
+                            ...parsedUA
+                        };
+
+                        displayDeviceInfo(deviceInfoData);
+                        copyBtn.classList.remove('hidden');
+                    } catch (error) {
+                        displayResult('deviceDisplay', 'Error: ' + error.message, true);
+                        deviceResult.classList.remove('hidden');
+                    }
+
+                    hideLoading(detectBtn, 'REFRESH.SCAN');
+                }, 500);
+            });
+
+            addClickListener('copyDeviceInfo', () => {
+                if (deviceInfoData) {
+                    const formattedInfo = formatDeviceInfoForCopy(deviceInfoData);
+                    copyToClipboard(formattedInfo, copyBtn);
+                }
+            });
+
+            function displayDeviceInfo(info) {
+                const html = `
+                    <div style="display: grid; gap: 2rem;">
+                        <!-- Basic Device Info -->
+                        <div class="info-section">
+                            <h3 style="color: #667eea; margin-bottom: 1rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem;">
+                                Device Overview
+                            </h3>
+                            <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                <div><strong>Device Type:</strong> ${info.deviceType}</div>
+                                <div><strong>Platform:</strong> ${info.platform}</div>
+                                <div><strong>Online Status:</strong> ${info.onLine ? 'Online' : 'Offline'}</div>
+                                <div><strong>Cookies Enabled:</strong> ${info.cookieEnabled ? 'Yes' : 'No'}</div>
+                            </div>
+                        </div>
+
+                        <!-- Browser Info -->
+                        <div class="info-section">
+                            <h3 style="color: #667eea; margin-bottom: 1rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem;">
+                                Browser Information
+                            </h3>
+                            <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                <div><strong>Browser:</strong> ${info.browser}</div>
+                                <div><strong>Version:</strong> ${info.browserVersion}</div>
+                                <div><strong>User Agent:</strong> <span style="font-family: monospace; font-size: 0.8rem; word-break: break-all;">${info.userAgent}</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Operating System -->
+                        <div class="info-section">
+                            <h3 style="color: #667eea; margin-bottom: 1rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem;">
+                                Operating System
+                            </h3>
+                            <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                <div><strong>OS:</strong> ${info.os}</div>
+                                <div><strong>Version:</strong> ${info.osVersion}</div>
+                            </div>
+                        </div>
+
+                        <!-- Hardware Info -->
+                        <div class="info-section">
+                            <h3 style="color: #667eea; margin-bottom: 1rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem;">
+                                Hardware Specifications
+                            </h3>
+                            <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                <div><strong>CPU Cores:</strong> ${info.hardwareConcurrency}</div>
+                                <div><strong>Screen Resolution:</strong> ${info.screenResolution}</div>
+                                <div><strong>Viewport Size:</strong> ${info.viewportSize}</div>
+                                <div><strong>Device Pixel Ratio:</strong> ${info.devicePixelRatio}</div>
+                                <div><strong>Color Depth:</strong> ${info.screenColorDepth} bit</div>
+                                <div><strong>Touch Support:</strong> ${info.maxTouchPoints > 0 ? `Yes (${info.maxTouchPoints} points)` : 'No'}</div>
+                            </div>
+                            ${info.memory ? `
+                                <div style="margin-top: 1rem;">
+                                    <h4>Memory Information</h4>
+                                    <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); font-size: 0.9rem;">
+                                        <div><strong>Used Heap:</strong> ${info.memory.usedJSHeapSize}</div>
+                                        <div><strong>Total Heap:</strong> ${info.memory.totalJSHeapSize}</div>
+                                        <div><strong>Heap Limit:</strong> ${info.memory.jsHeapSizeLimit}</div>
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <!-- Language & Locale -->
+                        <div class="info-section">
+                            <h3 style="color: #667eea; margin-bottom: 1rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem;">
+                                Language & Location
+                            </h3>
+                            <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                <div><strong>Primary Language:</strong> ${info.language}</div>
+                                <div><strong>All Languages:</strong> ${info.languages.join(', ')}</div>
+                                <div><strong>Timezone:</strong> ${info.timezone}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                deviceDisplay.innerHTML = html;
+                deviceResult.classList.remove('hidden', 'result-error');
+                deviceResult.classList.add('result-success');
+            }
+
+            function formatDeviceInfoForCopy(info) {
+                return `DEVICE INFORMATION
+===================
+
+Device Overview:
+- Device Type: ${info.deviceType}
+- Platform: ${info.platform}
+- Online Status: ${info.onLine ? 'Online' : 'Offline'}
+- Cookies Enabled: ${info.cookieEnabled ? 'Yes' : 'No'}
+
+Browser Information:
+- Browser: ${info.browser}
+- Version: ${info.browserVersion}
+- User Agent: ${info.userAgent}
+
+Operating System:
+- OS: ${info.os}
+- Version: ${info.osVersion}
+
+Hardware Specifications:
+- CPU Cores: ${info.hardwareConcurrency}
+- Screen Resolution: ${info.screenResolution}
+- Viewport Size: ${info.viewportSize}
+- Device Pixel Ratio: ${info.devicePixelRatio}
+- Color Depth: ${info.screenColorDepth} bit
+- Touch Support: ${info.maxTouchPoints > 0 ? `Yes (${info.maxTouchPoints} points)` : 'No'}
+${info.memory ? `
+Memory Information:
+- Used Heap: ${info.memory.usedJSHeapSize}
+- Total Heap: ${info.memory.totalJSHeapSize}
+- Heap Limit: ${info.memory.jsHeapSizeLimit}
+` : ''}
+Language & Location:
+- Primary Language: ${info.language}
+- All Languages: ${info.languages.join(', ')}
+- Timezone: ${info.timezone}
+
+Generated by WhatsMyTools.com`;
+            }
+
+            // Auto-detect on page load
+            detectBtn.click();
+        });
+    </script>
+</body>
+</html>

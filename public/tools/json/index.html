@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Format, validate, and beautify JSON online. Free JSON formatter and validator with syntax highlighting and error detection.">
+    <meta name="keywords" content="json formatter, json validator, pretty print json, json beautifier online">
+    <title>JSON Formatter/Validator - Format and Validate JSON | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">JSON.FORMATTER.VALIDATOR</h1>
+                <p class="tool-description">
+                    EXECUTE FORMAT_JSON_DATA() :: VALIDATE.BEAUTIFY.MINIFY.JSON :: CLIENT.SIDE.DATA.PROCESSING
+                </p>
+
+                <div style="display: grid; gap: 2rem;">
+                    <!-- Input Section -->
+                    <div>
+                        <div class="tool-input">
+                            <label for="jsonInput">Enter JSON data</label>
+                            <textarea id="jsonInput" placeholder="Enter your JSON data here..." rows="12" style="font-family: monospace;"></textarea>
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                            <button id="validateBtn" class="btn">EXECUTE.VALIDATE</button>
+                            <button id="formatBtn" class="btn">EXECUTE.FORMAT</button>
+                            <button id="minifyBtn" class="btn">EXECUTE.MINIFY</button>
+                            <button id="clearBtn" class="btn btn-secondary">CLEAR.ALL</button>
+                            <button id="copyResult" class="btn btn-secondary">COPY.RESULT</button>
+                        </div>
+                    </div>
+
+                    <!-- Status Section -->
+                    <div id="validationStatus" class="hidden">
+                        <div id="statusDisplay"></div>
+                    </div>
+
+                    <!-- Result Section -->
+                    <div id="jsonResult" class="result hidden">
+                        <div id="jsonDisplay"></div>
+                    </div>
+
+                    <!-- Quick Examples -->
+                    <div>
+                        <h3>Quick Examples</h3>
+                        <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                            <button onclick="loadExample('object')" class="btn btn-secondary">Simple Object</button>
+                            <button onclick="loadExample('array')" class="btn btn-secondary">Array Example</button>
+                            <button onclick="loadExample('nested')" class="btn btn-secondary">Nested Structure</button>
+                            <button onclick="loadExample('invalid')" class="btn btn-secondary">Invalid JSON</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About JSON</h3>
+                    <p>
+                        JSON (JavaScript Object Notation) is a lightweight, text-based data interchange format. 
+                        It's easy for humans to read and write, and easy for machines to parse and generate.
+                    </p>
+                    
+                    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div>
+                            <h4>JSON Rules</h4>
+                            <ul>
+                                <li>Data is in name/value pairs</li>
+                                <li>Data is separated by commas</li>
+                                <li>Objects are enclosed in curly braces {}</li>
+                                <li>Arrays are enclosed in square brackets []</li>
+                                <li>Strings must use double quotes</li>
+                                <li>No trailing commas allowed</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Data Types</h4>
+                            <ul>
+                                <li><strong>String:</strong> "Hello World"</li>
+                                <li><strong>Number:</strong> 42, 3.14</li>
+                                <li><strong>Boolean:</strong> true, false</li>
+                                <li><strong>null:</strong> null</li>
+                                <li><strong>Object:</strong> {"key": "value"}</li>
+                                <li><strong>Array:</strong> [1, 2, 3]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        let lastValidJSON = '';
+
+        ready(() => {
+            const jsonInput = document.getElementById('jsonInput');
+            const validateBtn = document.getElementById('validateBtn');
+            const formatBtn = document.getElementById('formatBtn');
+            const minifyBtn = document.getElementById('minifyBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const copyResult = document.getElementById('copyResult');
+            const validationStatus = document.getElementById('validationStatus');
+            const statusDisplay = document.getElementById('statusDisplay');
+            const jsonResult = document.getElementById('jsonResult');
+            const jsonDisplay = document.getElementById('jsonDisplay');
+
+            addClickListener('validateBtn', () => {
+                const jsonText = jsonInput.value.trim();
+                if (!jsonText) {
+                    alert('Please enter some JSON to validate.');
+                    return;
+                }
+
+                showLoading(validateBtn, 'VALIDATING.JSON...');
+                validationStatus.classList.add('hidden');
+                jsonResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    const validation = validateJSON(jsonText);
+                    displayValidationStatus(validation);
+                    hideLoading(validateBtn, 'EXECUTE.VALIDATE');
+                }, 200);
+            });
+
+            addClickListener('formatBtn', () => {
+                const jsonText = jsonInput.value.trim();
+                if (!jsonText) {
+                    alert('Please enter some JSON to format.');
+                    return;
+                }
+
+                showLoading(formatBtn, 'FORMATTING.DATA...');
+                jsonResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        const formatted = formatJSON(jsonText);
+                        displayFormattedResult(formatted, 'Formatted JSON');
+                        lastValidJSON = formatted;
+                    } catch (error) {
+                        displayResult('jsonDisplay', 'Error: ' + error.message, true);
+                        jsonResult.classList.remove('hidden');
+                    }
+                    hideLoading(formatBtn, 'EXECUTE.FORMAT');
+                }, 200);
+            });
+
+            addClickListener('minifyBtn', () => {
+                const jsonText = jsonInput.value.trim();
+                if (!jsonText) {
+                    alert('Please enter some JSON to minify.');
+                    return;
+                }
+
+                showLoading(minifyBtn, 'MINIFYING.DATA...');
+                jsonResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        const parsed = JSON.parse(jsonText);
+                        const minified = JSON.stringify(parsed);
+                        displayFormattedResult(minified, 'Minified JSON');
+                        lastValidJSON = minified;
+                    } catch (error) {
+                        displayResult('jsonDisplay', 'Error: ' + error.message, true);
+                        jsonResult.classList.remove('hidden');
+                    }
+                    hideLoading(minifyBtn, 'EXECUTE.MINIFY');
+                }, 200);
+            });
+
+            addClickListener('clearBtn', () => {
+                jsonInput.value = '';
+                validationStatus.classList.add('hidden');
+                jsonResult.classList.add('hidden');
+                lastValidJSON = '';
+            });
+
+            addClickListener('copyResult', () => {
+                if (lastValidJSON) {
+                    copyToClipboard(lastValidJSON, copyResult);
+                } else {
+                    alert('No formatted JSON to copy. Please format or validate JSON first.');
+                }
+            });
+
+            function displayValidationStatus(validation) {
+                const isValid = validation.valid;
+                const statusColor = isValid ? '#28a745' : '#dc3545';
+                const statusIcon = isValid ? '✅' : '❌';
+                const statusText = isValid ? 'Valid JSON' : 'Invalid JSON';
+
+                const html = `
+                    <div style="background: #000000; border: 1px solid #00ff00; border-radius: 4px; padding: 1rem; color: #00aa00;">
+                        <div style="color: #00aa00;">
+                            <span style="font-size: 1.2rem; margin-right: 0.5rem;">${statusIcon}</span>
+                            <strong>${statusText}</strong>
+                        </div>
+                        ${!isValid ? `
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+                                ${validation.message}
+                            </div>
+                        ` : `
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+                                Your JSON syntax is correct and can be parsed successfully.
+                            </div>
+                        `}
+                    </div>
+                `;
+
+                statusDisplay.innerHTML = html;
+                validationStatus.classList.remove('hidden');
+            }
+
+            function displayFormattedResult(formattedJson, title) {
+                const lines = formattedJson.split('\n').length;
+                const characters = formattedJson.length;
+                const bytes = new Blob([formattedJson]).size;
+
+                const html = `
+                    <h4 style="margin-bottom: 1rem;">${title}</h4>
+                    <div style="background: #000000; border: 1px solid #00ff00; border-radius: 4px; padding: 1rem; margin-bottom: 1rem; color: #00aa00;">
+                        <pre style="margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: 'Courier New', monospace; font-size: 0.9rem; max-height: 400px; overflow-y: auto;"><code>${escapeHtml(formattedJson)}</code></pre>
+                    </div>
+                    <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); font-size: 0.9rem;">
+                        <div><strong>Lines:</strong> ${lines}</div>
+                        <div><strong>Characters:</strong> ${characters}</div>
+                        <div><strong>Size:</strong> ${bytes} bytes</div>
+                        <div><strong>Type:</strong> ${getJSONType(formattedJson)}</div>
+                    </div>
+                `;
+
+                jsonDisplay.innerHTML = html;
+                jsonResult.classList.remove('hidden', 'result-error');
+                jsonResult.classList.add('result-success');
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function getJSONType(jsonString) {
+                try {
+                    const parsed = JSON.parse(jsonString);
+                    if (Array.isArray(parsed)) return 'Array';
+                    if (typeof parsed === 'object' && parsed !== null) return 'Object';
+                    if (typeof parsed === 'string') return 'String';
+                    if (typeof parsed === 'number') return 'Number';
+                    if (typeof parsed === 'boolean') return 'Boolean';
+                    if (parsed === null) return 'Null';
+                } catch (e) {
+                    return 'Unknown';
+                }
+            }
+
+            // Global function for examples
+            window.loadExample = (type) => {
+                let example = '';
+                
+                switch (type) {
+                    case 'object':
+                        example = `{
+  "name": "John Doe",
+  "age": 30,
+  "city": "New York",
+  "isEmployed": true
+}`;
+                        break;
+                    case 'array':
+                        example = `[
+  {
+    "id": 1,
+    "name": "Apple",
+    "color": "red"
+  },
+  {
+    "id": 2,
+    "name": "Banana",
+    "color": "yellow"
+  },
+  {
+    "id": 3,
+    "name": "Orange",
+    "color": "orange"
+  }
+]`;
+                        break;
+                    case 'nested':
+                        example = `{
+  "company": "Tech Corp",
+  "employees": [
+    {
+      "id": 1,
+      "personal": {
+        "name": "Alice Johnson",
+        "age": 28
+      },
+      "position": {
+        "title": "Developer",
+        "department": "Engineering",
+        "salary": 75000
+      },
+      "skills": ["JavaScript", "React", "Node.js"]
+    },
+    {
+      "id": 2,
+      "personal": {
+        "name": "Bob Smith",
+        "age": 35
+      },
+      "position": {
+        "title": "Manager",
+        "department": "Engineering",
+        "salary": 90000
+      },
+      "skills": ["Leadership", "Python", "AWS"]
+    }
+  ],
+  "founded": 2010,
+  "active": true
+}`;
+                        break;
+                    case 'invalid':
+                        example = `{
+  "name": "John Doe",
+  "age": 30,
+  "city": "New York",
+  "isEmployed": true,
+}`;
+                        break;
+                }
+                
+                jsonInput.value = example;
+                validateBtn.click();
+            };
+        });
+    </script>
+</body>
+</html>

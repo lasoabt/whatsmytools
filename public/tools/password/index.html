@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate secure random passwords online. Free password generator with customizable length, character sets, and strength indicators.">
+    <meta name="keywords" content="password generator online, strong password generator, random password tool, secure password creator">
+    <title>Password Generator - Strong Random Password Creator | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">PASSWORD.GENERATOR</h1>
+                <p class="tool-description">
+                    EXECUTE GENERATE_SECURE_KEY() :: CREATE.RANDOM.PASSWORDS.LOCALLY :: CLIENT.SIDE.SECURITY.PROCESSING
+                </p>
+
+                <!-- Password Options -->
+                <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-bottom: 2rem;">
+                    <div class="tool-input">
+                        <label for="passwordLength">Password Length</label>
+                        <input type="range" id="passwordLength" min="8" max="128" value="16" 
+                               oninput="document.getElementById('lengthDisplay').textContent = this.value">
+                        <div style="text-align: center; font-weight: bold; margin-top: 0.5rem;">
+                            <span id="lengthDisplay">16</span> characters
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Set Options -->
+                <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 2rem;">
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="checkbox" id="includeLowercase" checked style="margin-right: 0.5rem;">
+                        Lowercase (a-z)
+                    </label>
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="checkbox" id="includeUppercase" checked style="margin-right: 0.5rem;">
+                        Uppercase (A-Z)
+                    </label>
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="checkbox" id="includeNumbers" checked style="margin-right: 0.5rem;">
+                        Numbers (0-9)
+                    </label>
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="checkbox" id="includeSymbols" checked style="margin-right: 0.5rem;">
+                        Symbols (!@#$...)
+                    </label>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="text-center mb-2">
+                    <button id="generatePassword" class="btn">EXECUTE.GENERATE</button>
+                    <button id="generateMultiple" class="btn btn-secondary">GENERATE.MULTIPLE</button>
+                </div>
+
+                <!-- Password Result -->
+                <div id="passwordResult" class="result hidden">
+                    <div id="passwordDisplay"></div>
+                </div>
+
+                <!-- Password Security Tips -->
+                <div class="mt-2">
+                    <h3>Password Security Best Practices</h3>
+                    
+                    <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                        <div>
+                            <h4>Strong Password Requirements</h4>
+                            <ul>
+                                <li>At least 12-16 characters long</li>
+                                <li>Mix of uppercase and lowercase letters</li>
+                                <li>Include numbers and special symbols</li>
+                                <li>Avoid dictionary words and personal info</li>
+                                <li>Use unique passwords for each account</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4>Password Strength Indicators</h4>
+                            <div style="margin: 1rem 0;">
+                                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                    <div style="width: 20px; height: 20px; background: #dc3545; border-radius: 3px; margin-right: 0.5rem;"></div>
+                                    <span>Weak (8-11 characters)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                    <div style="width: 20px; height: 20px; background: #ffc107; border-radius: 3px; margin-right: 0.5rem;"></div>
+                                    <span>Medium (12-15 characters)</span>
+                                </div>
+                                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                    <div style="width: 20px; height: 20px; background: #28a745; border-radius: 3px; margin-right: 0.5rem;"></div>
+                                    <span>Strong (16+ characters)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #000000; border-left: 4px solid #00ff00; padding: 1rem; margin-top: 1.5rem; color: #00aa00;">
+                        <strong>Privacy Notice:</strong> All passwords are generated locally in your browser using cryptographically secure random number generation. No passwords are sent to our servers or stored anywhere.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        ready(() => {
+            const generateBtn = document.getElementById('generatePassword');
+            const generateMultipleBtn = document.getElementById('generateMultiple');
+            const passwordResult = document.getElementById('passwordResult');
+            const passwordDisplay = document.getElementById('passwordDisplay');
+
+            // Character set validation
+            function validateOptions() {
+                const lowercase = document.getElementById('includeLowercase').checked;
+                const uppercase = document.getElementById('includeUppercase').checked;
+                const numbers = document.getElementById('includeNumbers').checked;
+                const symbols = document.getElementById('includeSymbols').checked;
+                
+                if (!lowercase && !uppercase && !numbers && !symbols) {
+                    alert('Please select at least one character type.');
+                    return false;
+                }
+                return true;
+            }
+
+            addClickListener('generatePassword', () => {
+                if (!validateOptions()) return;
+                
+                showLoading(generateBtn, 'GENERATING.KEY...');
+                passwordResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        const password = generateSecurePassword();
+                        displaySinglePassword(password);
+                    } catch (error) {
+                        displayResult('passwordDisplay', 'Error: ' + error.message, true);
+                        passwordResult.classList.remove('hidden');
+                    }
+                    hideLoading(generateBtn, 'EXECUTE.GENERATE');
+                }, 200);
+            });
+
+            addClickListener('generateMultiple', () => {
+                if (!validateOptions()) return;
+                
+                showLoading(generateMultipleBtn, 'GENERATING.KEYS...');
+                passwordResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        const passwords = [];
+                        for (let i = 0; i < 5; i++) {
+                            passwords.push(generateSecurePassword());
+                        }
+                        displayMultiplePasswords(passwords);
+                    } catch (error) {
+                        displayResult('passwordDisplay', 'Error: ' + error.message, true);
+                        passwordResult.classList.remove('hidden');
+                    }
+                    hideLoading(generateMultipleBtn, 'GENERATE.MULTIPLE');
+                }, 300);
+            });
+
+            function generateSecurePassword() {
+                const length = parseInt(document.getElementById('passwordLength').value);
+                const options = {
+                    lowercase: document.getElementById('includeLowercase').checked,
+                    uppercase: document.getElementById('includeUppercase').checked,
+                    numbers: document.getElementById('includeNumbers').checked,
+                    symbols: document.getElementById('includeSymbols').checked
+                };
+
+                return generatePassword(length, options);
+            }
+
+            function calculatePasswordStrength(password, options) {
+                let score = 0;
+                let feedback = [];
+
+                // Length scoring
+                if (password.length >= 16) {
+                    score += 25;
+                } else if (password.length >= 12) {
+                    score += 15;
+                    feedback.push('Consider using 16+ characters for maximum security');
+                } else if (password.length >= 8) {
+                    score += 5;
+                    feedback.push('Password length is below recommended 12+ characters');
+                } else {
+                    feedback.push('Password is too short');
+                }
+
+                // Character variety scoring
+                if (options.lowercase) score += 15;
+                if (options.uppercase) score += 15;
+                if (options.numbers) score += 15;
+                if (options.symbols) score += 20;
+
+                // Additional entropy
+                const uniqueChars = new Set(password).size;
+                if (uniqueChars > password.length * 0.8) score += 10;
+
+                let strength, color;
+                if (score >= 80) {
+                    strength = 'VERY.STRONG';
+                    color = '#00ff00';
+                } else if (score >= 60) {
+                    strength = 'STRONG';
+                    color = '#00ff00';
+                } else if (score >= 40) {
+                    strength = 'MEDIUM';
+                    color = '#ffff00';
+                } else {
+                    strength = 'WEAK';
+                    color = '#ff0000';
+                }
+
+                return { strength, color, score, feedback };
+            }
+
+            function displaySinglePassword(password) {
+                const options = {
+                    lowercase: document.getElementById('includeLowercase').checked,
+                    uppercase: document.getElementById('includeUppercase').checked,
+                    numbers: document.getElementById('includeNumbers').checked,
+                    symbols: document.getElementById('includeSymbols').checked
+                };
+
+                const analysis = calculatePasswordStrength(password, options);
+                
+                const html = `
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="background: #000000; border: 2px solid #00ff00; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; color: #00aa00;">
+                            <div style="font-family: 'Courier Prime', monospace; font-size: 1.5rem; font-weight: bold; color: #00ff00; text-shadow: 0 0 5px #00ff00; word-break: break-all; margin-bottom: 1rem;">
+                                ${password}
+                            </div>
+                            <button onclick="copyToClipboard('${password}', this)" class="btn">Copy Password</button>
+                        </div>
+                        
+                        <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                            <div>
+                                <strong>Length:</strong> ${password.length} characters
+                            </div>
+                            <div>
+                                <strong>Strength:</strong> 
+                                <span style="color: ${analysis.color}; font-weight: bold;">${analysis.strength}</span>
+                            </div>
+                            <div>
+                                <strong>Unique Characters:</strong> ${new Set(password).size}
+                            </div>
+                        </div>
+                        
+                        ${analysis.feedback.length > 0 ? `
+                            <div style="margin-top: 1rem; padding: 0.75rem; background: #000000; border: 2px solid #00ff00; font-size: 0.9rem; color: #00aa00; font-family: 'Courier Prime', monospace;">
+                                <span style="color: #00ff00;">TIPS:</span> ${analysis.feedback.join('. ').toUpperCase()}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+
+                passwordDisplay.innerHTML = html;
+                passwordResult.classList.remove('hidden', 'result-error');
+                passwordResult.classList.add('result-success');
+            }
+
+            function displayMultiplePasswords(passwords) {
+                const options = {
+                    lowercase: document.getElementById('includeLowercase').checked,
+                    uppercase: document.getElementById('includeUppercase').checked,
+                    numbers: document.getElementById('includeNumbers').checked,
+                    symbols: document.getElementById('includeSymbols').checked
+                };
+
+                let html = `
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <h3 style="margin-bottom: 1rem;">Generated Passwords</h3>
+                        <button onclick="copyAllPasswords()" class="btn btn-secondary">Copy All Passwords</button>
+                    </div>
+                    <div style="display: grid; gap: 1rem;">
+                `;
+
+                passwords.forEach((password, index) => {
+                    const analysis = calculatePasswordStrength(password, options);
+                    html += `
+                        <div style="background: #000000; border: 1px solid #00ff00; border-radius: 4px; padding: 1rem; color: #00aa00;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-family: 'Courier Prime', monospace; font-weight: bold; flex-grow: 1; word-break: break-all; color: #00ff00;">
+                                    ${password}
+                                </div>
+                                <div style="margin-left: 1rem;">
+                                    <button onclick="copyToClipboard('${password}', this)" class="btn" style="padding: 0.5rem;">Copy</button>
+                                </div>
+                            </div>
+                            <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #00aa00; font-family: 'Courier Prime', monospace;">
+                                Strength: <span style="color: ${analysis.color}; font-weight: bold;">${analysis.strength}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+
+                passwordDisplay.innerHTML = html;
+                passwordResult.classList.remove('hidden', 'result-error');
+                passwordResult.classList.add('result-success');
+
+                // Add global function for copying all passwords
+                window.copyAllPasswords = () => {
+                    const allPasswords = passwords.join('\n');
+                    copyToClipboard(allPasswords, event.target);
+                };
+            }
+
+            // Generate initial password
+            generateBtn.click();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check your public IP address and location information. Free online IP checker tool to find your IPv4 and IPv6 address.">
+    <meta name="keywords" content="what is my ip, whats my ip address, ip checker online, ip lookup tool, find my ip, public ip address">
+    <title>What's My IP Address - Free Online IP Checker | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">WHATS.MY.IP.ADDRESS</h1>
+                <p class="tool-description">
+                    EXECUTE GET_PUBLIC_IP_ADDRESS() :: RETRIEVE.EXTERNAL.NETWORK.IDENTIFIER :: CLIENT.SIDE.PROCESSING.ONLY
+                </p>
+
+                <div class="text-center mb-2">
+                    <button id="checkIp" class="btn">EXECUTE.IP.SCAN</button>
+                </div>
+
+                <div id="ipResult" class="result hidden">
+                    <div id="ipDisplay"></div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About IP Addresses</h3>
+                    <p>
+                        An IP (Internet Protocol) address is a unique numerical label assigned to every device connected to the internet. 
+                        Your public IP address is assigned by your Internet Service Provider (ISP) and identifies your location on the internet.
+                    </p>
+                    
+                    <h4>Privacy Note</h4>
+                    <p>
+                        This tool respects your privacy. We don't store or log your IP address information. 
+                        The IP lookup is performed client-side using reputable public APIs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        ready(() => {
+            const checkIpBtn = document.getElementById('checkIp');
+            const ipResult = document.getElementById('ipResult');
+            const ipDisplay = document.getElementById('ipDisplay');
+
+            addClickListener('checkIp', async () => {
+                showLoading(checkIpBtn, 'SCANNING.NETWORK...');
+                ipResult.classList.add('hidden');
+
+                try {
+                    // Use multiple IP APIs for reliability
+                    let ipInfo = null;
+                    
+                    // Try ipify first (simple and reliable)
+                    try {
+                        const response = await fetch('https://api.ipify.org?format=json');
+                        const data = await response.json();
+                        ipInfo = { ip: data.ip };
+                    } catch (e) {
+                        console.warn('ipify failed, trying alternative...');
+                    }
+
+                    // If ipify failed, try ip-api.com for more detailed info
+                    if (!ipInfo) {
+                        try {
+                            const response = await fetch('http://ip-api.com/json/');
+                            const data = await response.json();
+                            ipInfo = {
+                                ip: data.query,
+                                country: data.country,
+                                region: data.regionName,
+                                city: data.city,
+                                isp: data.isp,
+                                timezone: data.timezone
+                            };
+                        } catch (e) {
+                            console.warn('ip-api failed, using fallback...');
+                        }
+                    }
+
+                    if (ipInfo) {
+                        displayIPInfo(ipInfo);
+                    } else {
+                        throw new Error('Unable to fetch IP information');
+                    }
+
+                } catch (error) {
+                    displayResult('ipDisplay', 'Error: ' + error.message, true);
+                    ipResult.classList.remove('hidden');
+                }
+
+                hideLoading(checkIpBtn, 'EXECUTE.IP.SCAN');
+            });
+
+            function displayIPInfo(ipInfo) {
+                let html = `
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h2 style="color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem;">${ipInfo.ip}</h2>
+                        <button onclick="copyToClipboard('${ipInfo.ip}', this)" class="btn btn-secondary">Copy IP Address</button>
+                    </div>
+                `;
+
+                if (ipInfo.country || ipInfo.region || ipInfo.city) {
+                    html += `
+                        <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    `;
+
+                    if (ipInfo.country) {
+                        html += `<div><strong>Country:</strong> ${ipInfo.country}</div>`;
+                    }
+                    if (ipInfo.region) {
+                        html += `<div><strong>Region:</strong> ${ipInfo.region}</div>`;
+                    }
+                    if (ipInfo.city) {
+                        html += `<div><strong>City:</strong> ${ipInfo.city}</div>`;
+                    }
+                    if (ipInfo.isp) {
+                        html += `<div><strong>ISP:</strong> ${ipInfo.isp}</div>`;
+                    }
+                    if (ipInfo.timezone) {
+                        html += `<div><strong>Timezone:</strong> ${ipInfo.timezone}</div>`;
+                    }
+
+                    html += `</div>`;
+                }
+
+                html += `
+                    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #ddd;">
+                        <small style="color: #666;">
+                            Note: Location information is approximate and based on your ISP's registered location, not your exact physical location.
+                        </small>
+                    </div>
+                `;
+
+                ipDisplay.innerHTML = html;
+                ipResult.classList.remove('hidden', 'result-error');
+                ipResult.classList.add('result-success');
+            }
+
+            // Auto-check IP on page load
+            checkIpBtn.click();
+        });
+    </script>
+</body>
+</html>

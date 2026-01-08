@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and analyze your browser's user agent string. Parse user agent information to identify browser, OS, and device details.">
+    <meta name="keywords" content="user agent checker, whats my user agent, browser user agent string, user agent parser online">
+    <title>User Agent Checker - What's My User Agent String | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">USER.AGENT.PARSER</h1>
+                <p class="tool-description">
+                    View and analyze your browser's user agent string. This tool parses the user agent to identify your browser, operating system, and device type.
+                </p>
+
+                <div class="text-center mb-2">
+                    <button id="analyzeUA" class="btn">Analyze My User Agent</button>
+                    <button id="copyUA" class="btn btn-secondary hidden">Copy User Agent</button>
+                </div>
+
+                <div id="uaResult" class="result hidden">
+                    <div id="uaDisplay"></div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About User Agent Strings</h3>
+                    <p>
+                        A User Agent string is a text string that web browsers send to websites to identify themselves. It contains information about the browser name, version, operating system, and device type. Websites use this information to deliver appropriate content and optimize the user experience.
+                    </p>
+                    
+                    <h4>User Agent Components</h4>
+                    <ul>
+                        <li><strong>Browser Information:</strong> Name and version of the web browser</li>
+                        <li><strong>Engine Information:</strong> Rendering engine (WebKit, Gecko, Blink, etc.)</li>
+                        <li><strong>Operating System:</strong> OS name and version</li>
+                        <li><strong>Device Information:</strong> Device type and sometimes model</li>
+                        <li><strong>Platform Information:</strong> Architecture and platform details</li>
+                    </ul>
+
+                    <h4>Privacy Considerations</h4>
+                    <p>
+                        User agent strings can be used for browser fingerprinting, which may impact privacy. Modern browsers are working to reduce the amount of identifying information in user agent strings while maintaining compatibility with websites that rely on this data.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        ready(() => {
+            const analyzeBtn = document.getElementById('analyzeUA');
+            const copyBtn = document.getElementById('copyUA');
+            const uaResult = document.getElementById('uaResult');
+            const uaDisplay = document.getElementById('uaDisplay');
+
+            addClickListener('analyzeUA', () => {
+                showLoading(analyzeBtn, 'Analyzing...');
+                uaResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    try {
+                        const userAgent = navigator.userAgent;
+                        const parsed = parseUserAgent(userAgent);
+                        displayUserAgentInfo(userAgent, parsed);
+                        copyBtn.classList.remove('hidden');
+                    } catch (error) {
+                        displayResult('uaDisplay', 'Error: ' + error.message, true);
+                        uaResult.classList.remove('hidden');
+                    }
+                    hideLoading(analyzeBtn, 'Refresh Analysis');
+                }, 300);
+            });
+
+            addClickListener('copyUA', () => {
+                copyToClipboard(navigator.userAgent, copyBtn);
+            });
+
+            function displayUserAgentInfo(userAgent, parsed) {
+                const html = `
+                    <div>
+                        <!-- Raw User Agent -->
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: #00ff00; margin-bottom: 1rem;">Raw User Agent String</h3>
+                            <div style="background: rgba(0, 255, 0, 0.05); border: 1px solid #00aa00; border-radius: 4px; padding: 1rem; font-family: 'Courier Prime', monospace; word-break: break-all; font-size: 0.9rem; color: #00ff00;">
+                                ${userAgent}
+                            </div>
+                        </div>
+
+                        <!-- Parsed Information -->
+                        <div style="display: grid; gap: 2rem;">
+                            <!-- Browser Info -->
+                            <div class="info-section">
+                                <h3 style="color: #00ff00; margin-bottom: 1rem; border-bottom: 1px solid #00aa00; padding-bottom: 0.5rem;">
+                                    Browser Information
+                                </h3>
+                                <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                    <div><strong>Browser:</strong> ${parsed.browser}</div>
+                                    <div><strong>Version:</strong> ${parsed.browserVersion}</div>
+                                    <div><strong>Engine:</strong> ${detectEngine(userAgent)}</div>
+                                    <div><strong>Cookies:</strong> ${navigator.cookieEnabled ? 'Enabled' : 'Disabled'}</div>
+                                </div>
+                            </div>
+
+                            <!-- Operating System -->
+                            <div class="info-section">
+                                <h3 style="color: #00ff00; margin-bottom: 1rem; border-bottom: 1px solid #00aa00; padding-bottom: 0.5rem;">
+                                    Operating System
+                                </h3>
+                                <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                    <div><strong>OS:</strong> ${parsed.os}</div>
+                                    <div><strong>Version:</strong> ${parsed.osVersion}</div>
+                                    <div><strong>Platform:</strong> ${navigator.platform}</div>
+                                    <div><strong>Architecture:</strong> ${detectArchitecture(userAgent)}</div>
+                                </div>
+                            </div>
+
+                            <!-- Device Information -->
+                            <div class="info-section">
+                                <h3 style="color: #00ff00; margin-bottom: 1rem; border-bottom: 1px solid #00aa00; padding-bottom: 0.5rem;">
+                                    Device Information
+                                </h3>
+                                <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                    <div><strong>Device Type:</strong> ${parsed.deviceType}</div>
+                                    <div><strong>Mobile:</strong> ${isMobile(userAgent) ? 'Yes' : 'No'}</div>
+                                    <div><strong>Tablet:</strong> ${isTablet(userAgent) ? 'Yes' : 'No'}</div>
+                                    <div><strong>Touch Support:</strong> ${navigator.maxTouchPoints > 0 ? 'Yes' : 'No'}</div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Features -->
+                            <div class="info-section">
+                                <h3 style="color: #00ff00; margin-bottom: 1rem; border-bottom: 1px solid #00aa00; padding-bottom: 0.5rem;">
+                                    Browser Features
+                                </h3>
+                                <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                    <div><strong>JavaScript:</strong> Enabled</div>
+                                    <div><strong>Online:</strong> ${navigator.onLine ? 'Yes' : 'No'}</div>
+                                    <div><strong>Language:</strong> ${navigator.language}</div>
+                                    <div><strong>Do Not Track:</strong> ${navigator.doNotTrack || 'Not set'}</div>
+                                </div>
+                            </div>
+
+                            <!-- Security Features -->
+                            <div class="info-section">
+                                <h3 style="color: #00ff00; margin-bottom: 1rem; border-bottom: 1px solid #00aa00; padding-bottom: 0.5rem;">
+                                    Security & Privacy Features
+                                </h3>
+                                <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                    <div><strong>HTTPS:</strong> ${location.protocol === 'https:' ? 'Yes' : 'No'}</div>
+                                    <div><strong>WebGL:</strong> ${hasWebGL() ? 'Supported' : 'Not supported'}</div>
+                                    <div><strong>Local Storage:</strong> ${hasLocalStorage() ? 'Available' : 'Not available'}</div>
+                                    <div><strong>Session Storage:</strong> ${hasSessionStorage() ? 'Available' : 'Not available'}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                uaDisplay.innerHTML = html;
+                uaResult.classList.remove('hidden', 'result-error');
+                uaResult.classList.add('result-success');
+            }
+
+            function detectEngine(userAgent) {
+                if (userAgent.includes('Gecko') && userAgent.includes('Firefox')) return 'Gecko';
+                if (userAgent.includes('WebKit')) {
+                    if (userAgent.includes('Chrome')) return 'Blink';
+                    return 'WebKit';
+                }
+                if (userAgent.includes('Trident')) return 'Trident';
+                if (userAgent.includes('EdgeHTML')) return 'EdgeHTML';
+                return 'Unknown';
+            }
+
+            function detectArchitecture(userAgent) {
+                if (userAgent.includes('WOW64') || userAgent.includes('Win64') || userAgent.includes('x64')) return '64-bit';
+                if (userAgent.includes('ARM') || userAgent.includes('aarch64')) return 'ARM';
+                if (userAgent.includes('x86')) return '32-bit';
+                return 'Unknown';
+            }
+
+            function isMobile(userAgent) {
+                return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+            }
+
+            function isTablet(userAgent) {
+                return /iPad|Android.*Tablet|Windows.*Touch/i.test(userAgent) && !/Mobile/i.test(userAgent);
+            }
+
+            function hasWebGL() {
+                try {
+                    const canvas = document.createElement('canvas');
+                    return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function hasLocalStorage() {
+                try {
+                    return typeof localStorage !== 'undefined' && localStorage !== null;
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function hasSessionStorage() {
+                try {
+                    return typeof sessionStorage !== 'undefined' && sessionStorage !== null;
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            // Auto-analyze on page load
+            analyzeBtn.click();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate UUID v4 (Universally Unique Identifiers) online. Free random UUID generator tool with multiple UUIDs option.">
+    <meta name="keywords" content="uuid generator, online uuid v4, random uuid tool, generate guid online">
+    <title>UUID Generator - Random UUID v4 Generator | WhatsMyTools.com</title>
+    <link rel="stylesheet" href="../../css/styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body>
+    <header class="retro-header">
+        <div class="container">
+            <h1 class="retro-logo">
+                <a href="../../" style="color: #00ff00; text-decoration: none;">
+                    <span class="cursor-blink">></span> WHATSMYTOOLS.COM <span class="cursor-blink">_</span>
+                </a>
+            </h1>
+            <p class="retro-tagline">SYSTEM.TOOLS.ONLINE :: PRIVACY.FIRST :: CLIENT.SIDE.PROCESSING</p>
+        </div>
+    </header>
+
+    <nav class="retro-nav">
+        <div class="container">
+            <div class="static-menu">
+                <a href="../ip/" class="nav-link">WHATS.MY.IP</a>
+                <a href="../device-info/" class="nav-link">DEVICE.INFO</a>
+                <a href="../screen-resolution/" class="nav-link">SCREEN.RES</a>
+                <a href="../dns-lookup/" class="nav-link">DNS.LOOKUP</a>
+                <a href="../whois/" class="nav-link">WHOIS</a>
+                <a href="../ping/" class="nav-link">PING.TEST</a>
+                <a href="../port-scanner/" class="nav-link">PORT.SCAN</a>
+                <a href="../user-agent/" class="nav-link">USER.AGENT</a>
+                <a href="../browser-version/" class="nav-link">BROWSER</a>
+                <a href="../os-check/" class="nav-link">OS.CHECK</a>
+                <a href="../uuid/" class="nav-link">UUID.GEN</a>
+                <a href="../qr/" class="nav-link">QR.CODE</a>
+                <a href="../password/" class="nav-link">PASSWORD</a>
+                <a href="../base64/" class="nav-link">BASE64</a>
+                <a href="../image-resizer/" class="nav-link">IMG.RESIZE</a>
+                <a href="../json/" class="nav-link">JSON</a>
+                <a href="../url/" class="nav-link">URL.ENCODE</a>
+                <a href="../diff/" class="nav-link">TEXT.DIFF</a>
+                <a href="../colors/" class="nav-link">COLORS</a>
+                <a href="../units/" class="nav-link">UNITS</a>
+            </div>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="../../" class="btn btn-secondary">&larr; RETURN.TO.MAIN.MENU</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="retro-main">
+        <div class="container">
+            <div class="tool-page">
+                <h1 class="tool-title">UUID.GENERATOR.TOOL</h1>
+                <p class="tool-description">
+                    Generate cryptographically strong UUID v4 (Universally Unique Identifiers) for your applications. All UUIDs are generated locally in your browser.
+                </p>
+
+                <div class="tool-input">
+                    <label for="uuidCount">Number of UUIDs to generate</label>
+                    <select id="uuidCount">
+                        <option value="1" selected>1 UUID</option>
+                        <option value="5">5 UUIDs</option>
+                        <option value="10">10 UUIDs</option>
+                        <option value="25">25 UUIDs</option>
+                        <option value="50">50 UUIDs</option>
+                        <option value="100">100 UUIDs</option>
+                    </select>
+                </div>
+
+                <div class="text-center mb-2">
+                    <button id="generateUUID" class="btn">EXECUTE.UUID.GENERATE</button>
+                    <button id="copyAllUUIDs" class="btn btn-secondary hidden">Copy All</button>
+                </div>
+
+                <div id="uuidResult" class="result hidden">
+                    <div id="uuidDisplay"></div>
+                </div>
+
+                <div class="mt-2">
+                    <h3>About UUIDs</h3>
+                    <p>
+                        A UUID (Universally Unique Identifier) is a 128-bit number used to uniquely identify information in computer systems. 
+                        UUID v4 uses random or pseudo-random numbers, making collisions extremely unlikely.
+                    </p>
+                    
+                    <h4>UUID Format</h4>
+                    <p>UUIDs are typically represented as 32 hexadecimal digits in the format: <code>xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx</code></p>
+                    
+                    <h4>Common Use Cases</h4>
+                    <ul>
+                        <li>Database primary keys</li>
+                        <li>API tokens and session identifiers</li>
+                        <li>File and resource naming</li>
+                        <li>Distributed system identifiers</li>
+                        <li>Software component identification</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="retro-footer">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <a href="../../privacy-policy.html" class="nav-link" style="margin: 0 1rem;">PRIVACY.POLICY</a>
+                <a href="../../terms-of-service.html" class="nav-link" style="margin: 0 1rem;">TERMS.OF.SERVICE</a>
+            </div>
+            <p>SYSTEM COPYRIGHT (C) 2024 WHATSMYTOOLS.COM :: ALL.RIGHTS.RESERVED :: RUN.LOCAL.EXECUTE.SAFE</p>
+        </div>
+    </footer>
+
+    <script src="../../js/utils.js"></script>
+    <script>
+        let generatedUUIDs = [];
+
+        ready(() => {
+            const generateBtn = document.getElementById('generateUUID');
+            const copyAllBtn = document.getElementById('copyAllUUIDs');
+            const uuidResult = document.getElementById('uuidResult');
+            const uuidDisplay = document.getElementById('uuidDisplay');
+
+            addClickListener('generateUUID', () => {
+                const count = parseInt(document.getElementById('uuidCount').value);
+                
+                showLoading(generateBtn, 'Generating...');
+                uuidResult.classList.add('hidden');
+
+                setTimeout(() => {
+                    generatedUUIDs = [];
+                    for (let i = 0; i < count; i++) {
+                        generatedUUIDs.push(generateUUID());
+                    }
+                    displayUUIDs(generatedUUIDs);
+                    copyAllBtn.classList.remove('hidden');
+                    hideLoading(generateBtn, 'Generate UUID');
+                }, 200);
+            });
+
+            addClickListener('copyAllUUIDs', () => {
+                const allUUIDs = generatedUUIDs.join('\n');
+                copyToClipboard(allUUIDs, copyAllBtn);
+            });
+
+            function displayUUIDs(uuids) {
+                let html = '';
+                
+                if (uuids.length === 1) {
+                    html = `
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <div style="background: #000000; border: 2px solid #00ff00; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+                                <div style="font-family: 'Courier Prime', monospace; font-size: 1.5rem; font-weight: bold; color: #00ff00; word-break: break-all;">
+                                    ${uuids[0]}
+                                </div>
+                                <button onclick="copyToClipboard('${uuids[0]}', this)" class="btn mt-1">Copy UUID</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    html = `
+                        <div style="margin-bottom: 1rem;">
+                            <h3 style="text-align: center;">Generated ${uuids.length} UUIDs</h3>
+                        </div>
+                        <div style="display: grid; gap: 0.5rem;">
+                    `;
+                    
+                    uuids.forEach((uuid, index) => {
+                        html += `
+                            <div style="background: #000000; border: 1px solid #00ff00; border-radius: 4px; padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-family: 'Courier Prime', monospace; font-weight: bold; flex-grow: 1; word-break: break-all; color: #00ff00;">
+                                    ${uuid}
+                                </span>
+                                <button onclick="copyToClipboard('${uuid}', this)" class="btn" style="padding: 0.5rem; margin-left: 1rem;">Copy</button>
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div>';
+                }
+
+                // Add UUID info
+                html += `
+                    <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 255, 0, 0.05); border-left: 4px solid #00ff00;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #00ff00;">UUID Details</h4>
+                        <div style="display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); font-size: 0.9rem; color: #00aa00;">
+                            <div><strong style="color: #00ff00;">Version:</strong> 4 (Random)</div>
+                            <div><strong style="color: #00ff00;">Length:</strong> 36 characters</div>
+                            <div><strong style="color: #00ff00;">Format:</strong> 8-4-4-4-12</div>
+                            <div><strong style="color: #00ff00;">Bits:</strong> 128-bit</div>
+                        </div>
+                        <p style="margin: 1rem 0 0 0; font-size: 0.9rem; color: #00aa00;">
+                            These UUIDs are generated using cryptographically strong random numbers, 
+                            ensuring virtually zero probability of duplicates.
+                        </p>
+                    </div>
+                `;
+
+                uuidDisplay.innerHTML = html;
+                uuidResult.classList.remove('hidden', 'result-error');
+                uuidResult.classList.add('result-success');
+            }
+
+            // Generate initial UUID
+            generateBtn.click();
+        });
+    </script>
+</body>
+</html>
