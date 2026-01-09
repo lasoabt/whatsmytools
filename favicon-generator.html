@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Favicon Generator</title>
+</head>
+<body>
+    <canvas id="canvas16" width="16" height="16"></canvas>
+    <canvas id="canvas32" width="32" height="32"></canvas>
+    <script>
+        // 16x16 favicon
+        const canvas16 = document.getElementById('canvas16');
+        const ctx16 = canvas16.getContext('2d');
+        ctx16.fillStyle = '#000000';
+        ctx16.fillRect(0, 0, 16, 16);
+        ctx16.strokeStyle = '#00ff00';
+        ctx16.lineWidth = 1;
+        ctx16.strokeRect(0.5, 0.5, 15, 15);
+        ctx16.beginPath();
+        ctx16.moveTo(4, 5);
+        ctx16.lineTo(7, 8);
+        ctx16.lineTo(4, 11);
+        ctx16.stroke();
+        ctx16.fillStyle = '#00ff00';
+        ctx16.fillRect(8, 10, 4, 1);
+
+        // 32x32 favicon
+        const canvas32 = document.getElementById('canvas32');
+        const ctx32 = canvas32.getContext('2d');
+        ctx32.fillStyle = '#000000';
+        ctx32.fillRect(0, 0, 32, 32);
+        ctx32.strokeStyle = '#00ff00';
+        ctx32.lineWidth = 1;
+        ctx32.strokeRect(1, 1, 30, 30);
+        ctx32.lineWidth = 2;
+        ctx32.beginPath();
+        ctx32.moveTo(8, 10);
+        ctx32.lineTo(14, 16);
+        ctx32.lineTo(8, 22);
+        ctx32.stroke();
+        ctx32.fillStyle = '#00ff00';
+        ctx32.fillRect(16, 21, 8, 2);
+        
+        // Scanlines
+        ctx32.globalAlpha = 0.3;
+        ctx32.lineWidth = 0.3;
+        for(let i = 8; i < 32; i += 8) {
+            ctx32.beginPath();
+            ctx32.moveTo(0, i);
+            ctx32.lineTo(32, i);
+            ctx32.stroke();
+        }
+
+        console.log('Favicons rendered. Right-click on each canvas to save as PNG.');
+    </script>
+</body>
+</html>
