@@ -1,72 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://whatsmytools.org/</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
   <!-- Core Network Tools -->
   <url>
-    <loc>https://whatsmytools.com/tools/ip/</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://whatsmytools.org/tools/ip/</loc>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/dns-lookup/</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://whatsmytools.org/tools/dns-lookup/</loc>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/whois/</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://whatsmytools.org/tools/whois/</loc>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/ping/</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://whatsmytools.org/tools/ping/</loc>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/port-scanner/</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://whatsmytools.org/tools/port-scanner/</loc>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <!-- Device Information Tools -->
   <url>
-    <loc>https://whatsmytools.com/tools/device-info/</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://whatsmytools.org/tools/device-info/</loc>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/screen-resolution/</loc>
+    <loc>https://whatsmytools.org/tools/screen-resolution/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/user-agent/</loc>
+    <loc>https://whatsmytools.org/tools/user-agent/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/browser-version/</loc>
+    <loc>https://whatsmytools.org/tools/browser-version/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/os-check/</loc>
+    <loc>https://whatsmytools.org/tools/os-check/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -74,21 +82,21 @@
   
   <!-- Generator Tools -->
   <url>
-    <loc>https://whatsmytools.com/tools/uuid/</loc>
+    <loc>https://whatsmytools.org/tools/uuid/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/qr/</loc>
+    <loc>https://whatsmytools.org/tools/qr/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/password/</loc>
+    <loc>https://whatsmytools.org/tools/password/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -96,49 +104,49 @@
   
   <!-- Converter Tools -->
   <url>
-    <loc>https://whatsmytools.com/tools/base64/</loc>
+    <loc>https://whatsmytools.org/tools/base64/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/url/</loc>
+    <loc>https://whatsmytools.org/tools/url/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/json/</loc>
+    <loc>https://whatsmytools.org/tools/json/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/colors/</loc>
+    <loc>https://whatsmytools.org/tools/colors/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/units/</loc>
+    <loc>https://whatsmytools.org/tools/units/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/image-resizer/</loc>
+    <loc>https://whatsmytools.org/tools/image-resizer/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/tools/diff/</loc>
+    <loc>https://whatsmytools.org/tools/diff/</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -146,14 +154,14 @@
   
   <!-- Legal Pages -->
   <url>
-    <loc>https://whatsmytools.com/privacy-policy.html</loc>
+    <loc>https://whatsmytools.org/privacy-policy.html</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
   <url>
-    <loc>https://whatsmytools.com/terms-of-service.html</loc>
+    <loc>https://whatsmytools.org/terms-of-service.html</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

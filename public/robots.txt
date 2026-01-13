@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://whatsmytools.com/sitemap.xml
+Sitemap: https://whatsmytools.org/sitemap.xml
 
 # Allow all major search engine crawlers
 User-agent: Googlebot
