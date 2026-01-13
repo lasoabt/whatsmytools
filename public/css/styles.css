@@ -14,6 +14,16 @@ body {
     line-height: 1.4;
     min-height: 100vh;
     overflow-x: hidden;
+    font-size: 16px;
+}
+
+/* Ensure proper text rendering on mobile */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
 }
 
 /* Scanline effect */
@@ -322,20 +332,48 @@ body::before {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Prevent horizontal overflow */
+    * {
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Header adjustments */
+    .retro-header {
+        padding: 1rem 0;
+    }
+    
     .retro-logo {
-        font-size: 2rem;
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+        word-break: break-word;
+    }
+    
+    .retro-tagline {
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+        line-height: 1.3;
+    }
+    
+    /* Navigation improvements */
+    .retro-nav {
+        padding: 0.75rem 0;
     }
     
     .static-menu {
-        flex-direction: column;
-        gap: 1rem;
+        gap: 0.5rem;
     }
     
     .nav-link {
-        width: 100%;
+        width: calc(50% - 0.25rem);
         text-align: center;
+        padding: 0.5rem 0.25rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
     }
     
+    /* Tab buttons */
     .tab-buttons {
         flex-direction: column;
     }
@@ -343,15 +381,215 @@ body::before {
     .tab-btn {
         border: 2px solid #00ff00;
         border-bottom: none;
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
     }
     
     .tab-btn:last-child {
         border-bottom: 2px solid #00ff00;
     }
     
+    /* Hero section */
+    .retro-hero {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .retro-hero h2 {
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+    }
+    
+    .retro-hero p {
+        font-size: 0.85rem;
+    }
+    
+    /* Grid layout */
     .retro-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+    
+    /* Tool cards */
+    .retro-card {
+        padding: 1rem;
+    }
+    
+    .retro-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .retro-card p {
+        font-size: 0.8rem;
+    }
+    
+    /* Tool page */
+    .tool-page {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .tool-title {
+        font-size: 1.3rem;
+    }
+    
+    .tool-description {
+        font-size: 0.85rem;
+    }
+    
+    .tool-page h3,
+    .tool-page h4 {
+        font-size: 1rem;
+    }
+    
+    .tool-page p,
+    .tool-page div,
+    .tool-page span {
+        font-size: 0.85rem;
+        word-break: break-word;
+    }
+    
+    /* Form elements */
+    .retro-input,
+    .retro-textarea,
+    .retro-select {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+    
+    .retro-btn {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+    }
+    
+    /* Output sections */
+    .retro-output {
+        font-size: 0.85rem;
+        padding: 1rem;
+    }
+    
+    /* Result boxes */
+    .result {
+        padding: 1rem;
+        margin: 1rem 0;
+        font-size: 0.85rem;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .result * {
+        font-size: 0.85rem !important;
+        line-height: 1.4;
+    }
+    
+    .result h3,
+    .result h4 {
+        font-size: 1rem !important;
+        margin-bottom: 0.5rem;
+    }
+    
+    .result strong {
+        font-size: 0.9rem !important;
+    }
+    
+    .result pre,
+    .result code {
+        font-size: 0.75rem !important;
+        word-break: break-all;
+        white-space: pre-wrap;
+    }
+    
+    /* Footer */
+    .retro-footer {
+        font-size: 0.75rem;
+        padding: 1rem 0;
+    }
+    
+    /* Container padding */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Main content */
+    .retro-main {
+        padding: 1rem 0;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .retro-logo {
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .retro-tagline {
+        font-size: 0.6rem;
+    }
+    
+    .nav-link {
+        font-size: 0.6rem;
+        padding: 0.4rem 0.2rem;
+    }
+    
+    .retro-hero h2 {
+        font-size: 1.1rem;
+    }
+    
+    .retro-hero p {
+        font-size: 0.75rem;
+    }
+    
+    .retro-card h3 {
+        font-size: 1rem;
+    }
+    
+    .tool-title {
+        font-size: 1.1rem;
+    }
+    
+    .retro-btn {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .result {
+        padding: 0.75rem;
+        font-size: 0.75rem;
+    }
+    
+    .result * {
+        font-size: 0.75rem !important;
+    }
+    
+    .result h3,
+    .result h4 {
+        font-size: 0.9rem !important;
+    }
+    
+    .result pre,
+    .result code {
+        font-size: 0.7rem !important;
+    }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .retro-logo {
+        font-size: 2rem;
+    }
+    
+    .nav-link {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.6rem;
+    }
+    
+    .retro-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .retro-hero h2 {
+        font-size: 1.75rem;
     }
 }
 
@@ -375,6 +613,21 @@ body::before {
 .tool-description {
     color: #00aa00;
     margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.tool-page > div,
+.tool-page > p,
+.tool-page #ipDisplay,
+.tool-page #result,
+.tool-page #output,
+.tool-page [id*="result"],
+.tool-page [id*="Result"],
+.tool-page [id*="display"],
+.tool-page [id*="Display"],
+.tool-page [id*="output"],
+.tool-page [id*="Output"] {
+    font-size: inherit;
     line-height: 1.6;
 }
 
